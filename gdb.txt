@@ -1,0 +1,548 @@
+Mar 15 15:05:10 (1458025510.862264) sockd[6275]: debug: int_ifname2sockaddr(): interface eth1 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.862360) sockd[6275]: debug: configparsing(): no address families explicitly enabled on internal interface.  Enabling default address families
+Mar 15 15:05:10 (1458025510.862371) sockd[6275]: debug: addinternal(): (interfacename eth1 port eq 80, tcp).  Change supported: 1
+Mar 15 15:05:10 (1458025510.862424) sockd[6275]: debug: addinternaladdr(): adding address 14.152.77.246.80 on nic eth1 to the internal list
+Mar 15 15:05:10 (1458025510.862785) sockd[6275]: debug: int_ifname2sockaddr(): interface eth2 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.862801) sockd[6275]: debug: addinternal(): (interfacename eth2 port eq 80, tcp).  Change supported: 1
+Mar 15 15:05:10 (1458025510.862872) sockd[6275]: debug: addinternaladdr(): adding address 122.13.20.246.80 on nic eth2 to the internal list
+Mar 15 15:05:10 (1458025510.863071) sockd[6275]: debug: int_ifname2sockaddr(): interface eth3 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863092) sockd[6275]: debug: addinternal(): (interfacename eth3 port eq 80, tcp).  Change supported: 1
+Mar 15 15:05:10 (1458025510.863158) sockd[6275]: debug: addinternaladdr(): adding address 183.232.229.244.80 on nic eth3 to the internal list
+Mar 15 15:05:10 (1458025510.863176) sockd[6275]: debug: configparsing(): no address families explicitly enabled on external interface.  Enabling default address families
+Mar 15 15:05:10 (1458025510.863240) sockd[6275]: debug: int_ifname2sockaddr(): interface eth1 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863305) sockd[6275]: debug: int_ifname2sockaddr(): interface eth1 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863319) sockd[6275]: debug: addexternal(): ifname eth1 resolved to address IPv4 address 14.152.77.246.  enabled
+Mar 15 15:05:10 (1458025510.863379) sockd[6275]: debug: int_ifname2sockaddr(): interface eth1 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863448) sockd[6275]: debug: int_ifname2sockaddr(): interface eth2 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863769) sockd[6275]: debug: int_ifname2sockaddr(): interface eth2 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863788) sockd[6275]: debug: addexternal(): ifname eth2 resolved to address IPv4 address 122.13.20.246.  enabled
+Mar 15 15:05:10 (1458025510.863851) sockd[6275]: debug: int_ifname2sockaddr(): interface eth2 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863920) sockd[6275]: debug: int_ifname2sockaddr(): interface eth3 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863963) sockd[6275]: debug: int_ifname2sockaddr(): interface eth3 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.863970) sockd[6275]: debug: addexternal(): ifname eth3 resolved to address IPv4 address 183.232.229.244.  enabled
+Mar 15 15:05:10 (1458025510.864002) sockd[6275]: debug: int_ifname2sockaddr(): interface eth3 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.864021) sockd[6275]: debug: methodisset(): checking if method username is set in the list (0) ""
+Mar 15 15:05:10 (1458025510.864027) sockd[6275]: debug: methodisset(): checking if method none is set in the list (1) "username"
+Mar 15 15:05:10 (1458025510.864035) sockd[6275]: debug: methodisset(): checking if method none is set in the list (0) ""
+Mar 15 15:05:10 (1458025510.864110) sockd[6275]: debug: methodisset(): checking if method none is set in the list (0) ""
+Mar 15 15:05:10 (1458025510.864123) sockd[6275]: debug: methodisset(): checking if method none is set in the list (1) "none"
+Mar 15 15:05:10 (1458025510.864131) sockd[6275]: debug: rulerequires(): client-rule: 1 requires 0: no
+Mar 15 15:05:10 (1458025510.864209) sockd[6275]: debug: rulerequires(): socks-rule: 0 requires 0: no
+Mar 15 15:05:10 (1458025510.864214) sockd[6275]: debug: rulerequires(): socks-rule: 0 requires 0: no
+Mar 15 15:05:10 (1458025510.864218) sockd[6275]: debug: rulerequires(): socks-rule: 1 requires 0: no
+Mar 15 15:05:10 (1458025510.864238) sockd[6275]: debug: rulerequires(): socks-rule: 0 requires 0: no
+Mar 15 15:05:10 (1458025510.864242) sockd[6275]: debug: rulerequires(): socks-rule: 2 requires 0: no
+Mar 15 15:05:10 (1458025510.864283) sockd[6275]: debug: sockd_initprivs(): will use euid/egid 0/0 normally
+Mar 15 15:05:10 (1458025510.864296) sockd[6275]: debug: postconfigloadinit(): I am a mother
+Mar 15 15:05:10 (1458025510.864333) sockd[6275]: debug: sockd_setcpusettings(): old cpu scheduling policy/priority: other/0, new: other/0
+Mar 15 15:05:10 (1458025510.864422) sockd[6275]: debug: sockd_setcpusettings(): old cpu affinity: <none set>, new: 0 1 2 3 
+Mar 15 15:05:10 (1458025510.864428) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.864433) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864443) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.864447) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864485) sockd[6275]: debug: mem2shmem(): will use filename /tmp/.sockdshmemXXXX5oxnuQ.1 for shmid 1 when creating shmem segment for mstats in monitor #1
+Mar 15 15:05:10 (1458025510.864503) sockd[6275]: debug: sockd_mmap(): mmap(2)'ing 1088 bytes from fd 12, mapping = (nil)
+Mar 15 15:05:10 (1458025510.864521) sockd[6275]: debug: mem2shmem(): allocated mstats_shmid 1 for object #1
+Mar 15 15:05:10 (1458025510.864533) sockd[6275]: debug: mem2shmem(): ok, allocated 1 shared memory id, first id is 1, last id is 2
+Mar 15 15:05:10 (1458025510.864562) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.864566) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864570) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.864574) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864577) sockd[6275]: debug: sockd_priv(): switching privilege 7 on
+Mar 15 15:05:10 (1458025510.864581) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864584) sockd[6275]: debug: sockd_priv(): switching privilege 7 off
+Mar 15 15:05:10 (1458025510.864588) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864591) sockd[6275]: debug: sockd_priv(): switching privilege 8 on
+Mar 15 15:05:10 (1458025510.864594) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864598) sockd[6275]: debug: sockd_priv(): switching privilege 8 off
+Mar 15 15:05:10 (1458025510.864606) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.864610) sockd[6275]: warning: checkconfig(): setting the unprivileged uid to 0 is not recommended for security reasons
+Mar 15 15:05:10 (1458025510.864666) sockd[6275]: debug: int_ifname2sockaddr(): interface eth1 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.864685) sockd[6275]: debug: socks_bind(): trying to bind address 14.152.77.246.0 on fd 12.  Retries is 0
+Mar 15 15:05:10 (1458025510.864699) sockd[6275]: debug: socks_bind(): bound address 14.152.77.246.63697 on fd 12
+Mar 15 15:05:10 (1458025510.864742) sockd[6275]: debug: int_ifname2sockaddr(): interface eth2 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.864750) sockd[6275]: debug: socks_bind(): trying to bind address 122.13.20.246.0 on fd 12.  Retries is 0
+Mar 15 15:05:10 (1458025510.864757) sockd[6275]: debug: socks_bind(): bound address 122.13.20.246.30078 on fd 12
+Mar 15 15:05:10 (1458025510.864792) sockd[6275]: debug: int_ifname2sockaddr(): interface eth3 missing netmask for address <undecoded af 17>, skipping
+Mar 15 15:05:10 (1458025510.864806) sockd[6275]: debug: socks_bind(): trying to bind address 183.232.229.244.0 on fd 12.  Retries is 0
+Mar 15 15:05:10 (1458025510.864813) sockd[6275]: debug: socks_bind(): bound address 183.232.229.244.19922 on fd 12
+Mar 15 15:05:10 (1458025510.864830) sockd[6275]: debug: setsockoptions(): fd 12, type = 1, isclientside = 1
+Mar 15 15:05:10 (1458025510.864837) sockd[6275]: debug: setsockoptions(): 3 options to set
+Mar 15 15:05:10 (1458025510.864849) sockd[6275]: debug: setsockoptions(): buffer sizes for fd 12 are: SO_SNDBUF: 16384, SO_RCVBUF: 87380
+Mar 15 15:05:10 (1458025510.864854) sockd[6275]: debug: setconfsockoptions(): going through options, looking for tcp socket options for fd 12 (in: 12) on the internal side
+Mar 15 15:05:10 (1458025510.864858) sockd[6275]: debug: setconfsockoptions(): going through global array with 0 options, looking for globals matching 5 (pre-establishment or any time)
+Mar 15 15:05:10 (1458025510.864878) sockd[6275]: debug: setsockoptions(): fd 14, type = 1, isclientside = 1
+Mar 15 15:05:10 (1458025510.864883) sockd[6275]: debug: setsockoptions(): 3 options to set
+Mar 15 15:05:10 (1458025510.864887) sockd[6275]: debug: setsockoptions(): buffer sizes for fd 14 are: SO_SNDBUF: 16384, SO_RCVBUF: 87380
+Mar 15 15:05:10 (1458025510.864891) sockd[6275]: debug: setconfsockoptions(): going through options, looking for tcp socket options for fd 14 (in: 14) on the internal side
+Mar 15 15:05:10 (1458025510.864895) sockd[6275]: debug: setconfsockoptions(): going through global array with 0 options, looking for globals matching 5 (pre-establishment or any time)
+Mar 15 15:05:10 (1458025510.864907) sockd[6275]: debug: setsockoptions(): fd 15, type = 1, isclientside = 1
+Mar 15 15:05:10 (1458025510.864911) sockd[6275]: debug: setsockoptions(): 3 options to set
+Mar 15 15:05:10 (1458025510.864915) sockd[6275]: debug: setsockoptions(): buffer sizes for fd 15 are: SO_SNDBUF: 16384, SO_RCVBUF: 87380
+Mar 15 15:05:10 (1458025510.864919) sockd[6275]: debug: setconfsockoptions(): going through options, looking for tcp socket options for fd 15 (in: 15) on the internal side
+Mar 15 15:05:10 (1458025510.864923) sockd[6275]: debug: setconfsockoptions(): going through global array with 0 options, looking for globals matching 5 (pre-establishment or any time)
+Mar 15 15:05:10 (1458025510.864930) sockd[6275]: debug: resetprivileges(): euid/egid 0/0
+Mar 15 15:05:10 (1458025510.864938) sockd[6275]: debug: cmdline options:
+"daemon": "0",
+"servercount": "1",
+"verifyonly": "no",
+"debug": "2",
+"configfile": "sockd.conf",
+"debuglevel": "2",
+"keepalive": "1",
+"pidfile": "/var/run/sockd.pid"
+Mar 15 15:05:10 (1458025510.864942) sockd[6275]: debug: address-families to look for on internal interface: IPv4 address: yes, IPv6 address: yes
+Mar 15 15:05:10 (1458025510.864946) sockd[6275]: debug: internal addresses (3):
+Mar 15 15:05:10 (1458025510.864955) sockd[6275]: debug: 	tcp IPv4 address 14.152.77.246.80
+Mar 15 15:05:10 (1458025510.864960) sockd[6275]: debug: 	tcp IPv4 address 122.13.20.246.80
+Mar 15 15:05:10 (1458025510.864964) sockd[6275]: debug: 	tcp IPv4 address 183.232.229.244.80
+Mar 15 15:05:10 (1458025510.864968) sockd[6275]: debug: global socket options on the internal side:
+Mar 15 15:05:10 (1458025510.864972) sockd[6275]: debug: address-families to look for on external interface: IPv4 address: yes, IPv6 address: yes
+Mar 15 15:05:10 (1458025510.864976) sockd[6275]: debug: external addresses (3):
+Mar 15 15:05:10 (1458025510.864980) sockd[6275]: debug: 	interfacename eth1
+Mar 15 15:05:10 (1458025510.864984) sockd[6275]: debug: 	interfacename eth2
+Mar 15 15:05:10 (1458025510.864987) sockd[6275]: debug: 	interfacename eth3
+Mar 15 15:05:10 (1458025510.864991) sockd[6275]: debug: 	have IPv4 on external address list?  Yes.  IPv6?  No
+Mar 15 15:05:10 (1458025510.864994) sockd[6275]: debug: global socket options on the external side:
+Mar 15 15:05:10 (1458025510.864998) sockd[6275]: debug: external address rotation: none
+Mar 15 15:05:10 (1458025510.865001) sockd[6275]: debug: compatibility options: 
+Mar 15 15:05:10 (1458025510.865008) sockd[6275]: debug: extensions enabled: 
+Mar 15 15:05:10 (1458025510.865011) sockd[6275]: debug: connect udp sockets to destination: yes
+Mar 15 15:05:10 (1458025510.865016) sockd[6275]: debug: logoutput goes to: "stdout", "/var/log/sockd.log"
+Mar 15 15:05:10 (1458025510.865020) sockd[6275]: debug: resolveprotocol: udp
+Mar 15 15:05:10 (1458025510.865023) sockd[6275]: debug: connect timeout: 30s
+Mar 15 15:05:10 (1458025510.865027) sockd[6275]: debug: negotiate timeout: 30s
+Mar 15 15:05:10 (1458025510.865030) sockd[6275]: debug: i/o timeout: tcp: 0s, udp: 86400s
+Mar 15 15:05:10 (1458025510.865033) sockd[6275]: debug: tcp fin-wait-2 timeout: 0s (use kernel default)
+Mar 15 15:05:10 (1458025510.865038) sockd[6275]: debug: global route options: "badexpire: 300", "maxfail: 1"
+Mar 15 15:05:10 (1458025510.865041) sockd[6275]: debug: direct route fallback: disabled
+Mar 15 15:05:10 (1458025510.865044) sockd[6275]: debug: euid: 0
+Mar 15 15:05:10 (1458025510.890561) sockd[6275]: debug: userid:
+"privileged": "root",
+"unprivileged": "root",
+"libwrap": "root"
+Mar 15 15:05:10 (1458025510.890585) sockd[6275]: debug: clientmethod(s): none
+Mar 15 15:05:10 (1458025510.890594) sockd[6275]: debug: socksmethod(s): username, none
+Mar 15 15:05:10 (1458025510.890601) sockd[6275]: debug: client-rules (1): 
+Mar 15 15:05:10 (1458025510.890611) sockd[6275]: debug: client-rule #1, line #180
+Mar 15 15:05:10 (1458025510.890619) sockd[6275]: debug: verdict: pass
+Mar 15 15:05:10 (1458025510.890631) sockd[6275]: debug: src: IPv4 address 0.0.0.0/0 port range 1 - 65535
+Mar 15 15:05:10 (1458025510.890639) sockd[6275]: debug: dst: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890650) sockd[6275]: debug: command(s): 
+Mar 15 15:05:10 (1458025510.890662) sockd[6275]: debug: extension(s): 
+Mar 15 15:05:10 (1458025510.890670) sockd[6275]: debug: protocol(s): tcp
+Mar 15 15:05:10 (1458025510.890677) sockd[6275]: debug: clientmethod(s): none
+Mar 15 15:05:10 (1458025510.890685) sockd[6275]: debug: socksmethod(s): username, none
+Mar 15 15:05:10 (1458025510.890692) sockd[6275]: debug: proxyprotocol(s): socks_v4, socks_v5
+Mar 15 15:05:10 (1458025510.890701) sockd[6275]: debug: log: connect, disconnect, error, iooperation
+Mar 15 15:05:10 (1458025510.890709) sockd[6275]: debug: socks-rules (2): 
+Mar 15 15:05:10 (1458025510.890732) sockd[6275]: debug: socks-rule #1, line #240
+Mar 15 15:05:10 (1458025510.890745) sockd[6275]: debug: verdict: pass
+Mar 15 15:05:10 (1458025510.890757) sockd[6275]: debug: src: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890769) sockd[6275]: debug: dst: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890782) sockd[6275]: debug: command(s): bind, connect, udpassociate
+Mar 15 15:05:10 (1458025510.890792) sockd[6275]: debug: extension(s): 
+Mar 15 15:05:10 (1458025510.890803) sockd[6275]: debug: protocol(s): tcp, udp
+Mar 15 15:05:10 (1458025510.890822) sockd[6275]: debug: clientmethod(s): none
+Mar 15 15:05:10 (1458025510.890831) sockd[6275]: debug: socksmethod(s): username, none
+Mar 15 15:05:10 (1458025510.890838) sockd[6275]: debug: proxyprotocol(s): socks_v4, socks_v5
+Mar 15 15:05:10 (1458025510.890846) sockd[6275]: debug: log: connect, disconnect, error, iooperation
+Mar 15 15:05:10 (1458025510.890855) sockd[6275]: debug: socks-rule #2, line #252
+Mar 15 15:05:10 (1458025510.890863) sockd[6275]: debug: verdict: pass
+Mar 15 15:05:10 (1458025510.890871) sockd[6275]: debug: src: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890879) sockd[6275]: debug: dst: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890887) sockd[6275]: debug: command(s): bindreply, udpreply
+Mar 15 15:05:10 (1458025510.890894) sockd[6275]: debug: extension(s): 
+Mar 15 15:05:10 (1458025510.890901) sockd[6275]: debug: protocol(s): tcp, udp
+Mar 15 15:05:10 (1458025510.890908) sockd[6275]: debug: clientmethod(s): none
+Mar 15 15:05:10 (1458025510.890915) sockd[6275]: debug: socksmethod(s): none
+Mar 15 15:05:10 (1458025510.890922) sockd[6275]: debug: proxyprotocol(s): socks_v4, socks_v5
+Mar 15 15:05:10 (1458025510.890935) sockd[6275]: debug: log: connect, disconnect, error, iooperation
+Mar 15 15:05:10 (1458025510.890942) sockd[6275]: debug: routes (0): 
+Mar 15 15:05:10 (1458025510.890949) sockd[6275]: debug: monitors (1): 
+Mar 15 15:05:10 (1458025510.890956) sockd[6275]: debug: monitor #1, line #185, shmid 1
+Mar 15 15:05:10 (1458025510.890965) sockd[6275]: debug: src: IPv4 address 0.0.0.0/0
+Mar 15 15:05:10 (1458025510.890974) sockd[6275]: debug: dst: IPv4 address 0.0.0.0/0 port range 1 - 65535
+Mar 15 15:05:10 (1458025510.890988) sockd[6275]: debug: sockd_mmap(): mmap(2)'ing 1088 bytes from fd 16, mapping = (nil)
+Mar 15 15:05:10 (1458025510.891006) sockd[6275]: debug: sockd_shmat(): attached to mstats_shmid 1 of size 1088 at 0x7ffff7ff4000, 0 clients, filename /tmp/.sockdshmemXXXX5oxnuQ.1
+Mar 15 15:05:10 (1458025510.891018) sockd[6275]: debug: alarms on internal interface:
+Mar 15 15:05:10 (1458025510.891027) sockd[6275]: debug: alarm if sending less or equal to 1 byte every 10 seconds
+Mar 15 15:05:10 (1458025510.891039) sockd[6275]: debug: alarms on external interface:
+Mar 15 15:05:10 (1458025510.891049) sockd[6275]: debug: alarm if receiving less or equal to 1 byte every 10 seconds
+Mar 15 15:05:10 (1458025510.891060) sockd[6275]: debug: alarm_data_aggregate: 0, alarm_disconnect_aggregate: 0
+Mar 15 15:05:10 (1458025510.891072) sockd[6275]: debug: sockd_shmdt(): detaching from mstats_shmid 1 at 0x7ffff7ff4000 with 0 clients
+Mar 15 15:05:10 (1458025510.891093) sockd[6275]: debug: command(s): bind, bindreply, connect
+Mar 15 15:05:10 (1458025510.891100) sockd[6275]: debug: extension(s): 
+Mar 15 15:05:10 (1458025510.891107) sockd[6275]: debug: protocol(s): tcp
+Mar 15 15:05:10 (1458025510.891114) sockd[6275]: debug: clientmethod(s): 
+Mar 15 15:05:10 (1458025510.891120) sockd[6275]: debug: socksmethod(s): 
+Mar 15 15:05:10 (1458025510.891127) sockd[6275]: debug: proxyprotocol(s): 
+Mar 15 15:05:10 (1458025510.891134) sockd[6275]: debug: shmemconfigfd: 9, hostfd: 10, loglock: 11, shmemfd: 8, 
+Mar 15 15:05:10 (1458025510.891387) sockd[6275]: debug: mother_envsetup(): minfd_negotiate: 111, minfd_request: 18, minfd_io: 175
+Mar 15 15:05:10 (1458025510.891396) sockd[6275]: debug: hard limit for max number of open files is 4096, soft limit is 1024
+Mar 15 15:05:10 (1458025510.891406) sockd[6275]: debug: max number of file descriptors is now 4096
+Mar 15 15:05:10 (1458025510.891420) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.891427) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.891445) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.891452) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.892161) sockd[6275]: debug: childcheck(): current # of free monitor-child slots is 0, configured minimum is 1: need to add more monitor-children
+Mar 15 15:05:10 (1458025510.892183) sockd[6275]: debug: addchild(): type is monitor-child
+Mar 15 15:05:10 (1458025510.892210) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.892218) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.892228) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.892235) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.892243) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.892250) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.892258) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.892265) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.892273) sockd[6275]: debug: addchild(): highest fd in use at the moment: 20
+Mar 15 15:05:10 (1458025510.893841) sockd[6276]: debug: postconfigloadinit(): I am a monitor-child
+Mar 15 15:05:10 (1458025510.893906) sockd[6276]: debug: sockd_setcpusettings(): old cpu scheduling policy/priority: other/0, new: other/0
+Mar 15 15:05:10 (1458025510.894011) sockd[6275]: debug: addchild(): created new monitor-child with pid 6276, data-pipe 17 and ack-pipe 19.  Minimum rcvbuf: 4, set: 2304 and 2304.  Minimum sndbuf: 4, set: 4608 and 4608
+Mar 15 15:05:10 (1458025510.894040) sockd[6275]: debug: childcheck(): added child, pid 6276
+Mar 15 15:05:10 (1458025510.894061) sockd[6275]: debug: sockopts_dump(): socket option name (level/value) (102 entries):
+Mar 15 15:05:10 (1458025510.894073) sockd[6275]: debug: sockopts_dump(): 00: so_broadcast (1/6)
+Mar 15 15:05:10 (1458025510.894083) sockd[6275]: debug: sockopts_dump(): 01: so_debug (1/1)
+Mar 15 15:05:10 (1458025510.894091) sockd[6275]: debug: sockopts_dump(): 02: so_dontroute (1/5)
+Mar 15 15:05:10 (1458025510.894098) sockd[6275]: debug: sockopts_dump(): 03: so_keepalive (1/9)
+Mar 15 15:05:10 (1458025510.894105) sockd[6275]: debug: sockopts_dump(): 04: so_linger (1/13)
+Mar 15 15:05:10 (1458025510.894113) sockd[6275]: debug: sockopts_dump(): 05: so_oobinline (1/10)
+Mar 15 15:05:10 (1458025510.894120) sockd[6275]: debug: sockopts_dump(): 06: so_priority (1/12)
+Mar 15 15:05:10 (1458025510.894127) sockd[6275]: debug: sockopts_dump(): 07: so_rcvbuf (1/8)
+Mar 15 15:05:10 (1458025510.894135) sockd[6275]: debug: sockopts_dump(): 08: so_rcvbufforce (1/33)
+Mar 15 15:05:10 (1458025510.894142) sockd[6275]: debug: sockopts_dump(): 09: so_rcvlowat (1/18)
+Mar 15 15:05:10 (1458025510.894149) sockd[6275]: debug: sockopts_dump(): 10: so_rcvtimeo (1/20)
+Mar 15 15:05:10 (1458025510.894156) sockd[6275]: debug: sockopts_dump(): 11: so_sndbuf (1/7)
+Mar 15 15:05:10 (1458025510.894164) sockd[6275]: debug: sockopts_dump(): 12: so_sndbufforce (1/32)
+Mar 15 15:05:10 (1458025510.894171) sockd[6275]: debug: sockopts_dump(): 13: so_sndlowat (1/19)
+Mar 15 15:05:10 (1458025510.894178) sockd[6275]: debug: sockopts_dump(): 14: so_sndtimeo (1/21)
+Mar 15 15:05:10 (1458025510.894185) sockd[6275]: debug: sockopts_dump(): 15: so_timestamp (1/29)
+Mar 15 15:05:10 (1458025510.894192) sockd[6275]: debug: sockopts_dump(): 16: tcp_cork (6/3)
+Mar 15 15:05:10 (1458025510.894199) sockd[6275]: debug: sockopts_dump(): 17: tcp_keepcnt (6/6)
+Mar 15 15:05:10 (1458025510.894206) sockd[6275]: debug: sockopts_dump(): 18: tcp_keepidle (6/4)
+Mar 15 15:05:10 (1458025510.894213) sockd[6275]: debug: sockopts_dump(): 19: tcp_keepintvl (6/5)
+Mar 15 15:05:10 (1458025510.894221) sockd[6275]: debug: sockopts_dump(): 20: tcp_linger2 (6/8)
+Mar 15 15:05:10 (1458025510.894228) sockd[6275]: debug: sockopts_dump(): 21: tcp_maxseg (6/2)
+Mar 15 15:05:10 (1458025510.894235) sockd[6275]: debug: sockopts_dump(): 22: tcp_md5sig (6/14)
+Mar 15 15:05:10 (1458025510.894242) sockd[6275]: debug: sockopts_dump(): 23: tcp_nodelay (6/1)
+Mar 15 15:05:10 (1458025510.894249) sockd[6275]: debug: sockopts_dump(): 24: tcp_syncnt (6/7)
+Mar 15 15:05:10 (1458025510.894257) sockd[6275]: debug: sockopts_dump(): 25: tcp_window_clamp (6/10)
+Mar 15 15:05:10 (1458025510.894273) sockd[6275]: debug: sockopts_dump(): 26: udp_cork (17/1)
+Mar 15 15:05:10 (1458025510.894280) sockd[6275]: debug: sockopts_dump(): 27: ip_freebind (0/15)
+Mar 15 15:05:10 (1458025510.894288) sockd[6275]: debug: sockopts_dump(): 28: ip_minttl (0/21)
+Mar 15 15:05:10 (1458025510.894295) sockd[6275]: debug: sockopts_dump(): 29: ip_mtu_discover (0/10)
+Mar 15 15:05:10 (1458025510.894302) sockd[6275]: debug: sockopts_dump(): 30: ip_tos (0/1)
+Mar 15 15:05:10 (1458025510.894310) sockd[6275]: debug: sockopts_dump(): 31: ip_tos.dscp (0/1)
+Mar 15 15:05:10 (1458025510.894317) sockd[6275]: debug: sockopts_dump(): 32: ip_tos.prec (0/1)
+Mar 15 15:05:10 (1458025510.894324) sockd[6275]: debug: sockopts_dump(): 33: ip_tos.tos (0/1)
+Mar 15 15:05:10 (1458025510.894331) sockd[6275]: debug: sockopts_dump(): 34: ip_ttl (0/2)
+Mar 15 15:05:10 (1458025510.894338) sockd[6275]: debug: sockopts_dump(): 35: ipv6_addrform (41/1)
+Mar 15 15:05:10 (1458025510.894346) sockd[6275]: debug: sockopts_dump(): 36: ipv6_unicast_hops (41/16)
+Mar 15 15:05:10 (1458025510.894353) sockd[6275]: debug: sockopts_dump(): 37: ipv6_2292dstopts (41/4)
+Mar 15 15:05:10 (1458025510.894365) sockd[6275]: debug: sockopts_dump(): 38: ipv6_2292hoplimit (41/8)
+Mar 15 15:05:10 (1458025510.894373) sockd[6275]: debug: sockopts_dump(): 39: ipv6_2292hopopts (41/3)
+Mar 15 15:05:10 (1458025510.894380) sockd[6275]: debug: sockopts_dump(): 40: ipv6_2292pktinfo (41/2)
+Mar 15 15:05:10 (1458025510.894387) sockd[6275]: debug: sockopts_dump(): 41: ipv6_2292pktoptions (41/6)
+Mar 15 15:05:10 (1458025510.894394) sockd[6275]: debug: sockopts_dump(): 42: ipv6_2292rthdr (41/5)
+Mar 15 15:05:10 (1458025510.894402) sockd[6275]: debug: sockopts_dump(): 43: ipv6_addrform (41/1)
+Mar 15 15:05:10 (1458025510.894409) sockd[6275]: debug: sockopts_dump(): 44: ipv6_authhdr (41/10)
+Mar 15 15:05:10 (1458025510.894416) sockd[6275]: debug: sockopts_dump(): 45: ipv6_checksum (41/7)
+Mar 15 15:05:10 (1458025510.894423) sockd[6275]: debug: sockopts_dump(): 46: ipv6_dstopts (41/59)
+Mar 15 15:05:10 (1458025510.894430) sockd[6275]: debug: sockopts_dump(): 47: ipv6_dstopts (41/59)
+Mar 15 15:05:10 (1458025510.894437) sockd[6275]: debug: sockopts_dump(): 48: ipv6_hoplimit (41/52)
+Mar 15 15:05:10 (1458025510.894444) sockd[6275]: debug: sockopts_dump(): 49: ipv6_hoplimit (41/52)
+Mar 15 15:05:10 (1458025510.894451) sockd[6275]: debug: sockopts_dump(): 50: ipv6_hopopts (41/54)
+Mar 15 15:05:10 (1458025510.894458) sockd[6275]: debug: sockopts_dump(): 51: ipv6_hopopts (41/54)
+Mar 15 15:05:10 (1458025510.894465) sockd[6275]: debug: sockopts_dump(): 52: ipv6_ipsec_policy (41/34)
+Mar 15 15:05:10 (1458025510.894472) sockd[6275]: debug: sockopts_dump(): 53: ipv6_join_anycast (41/27)
+Mar 15 15:05:10 (1458025510.894490) sockd[6275]: debug: sockopts_dump(): 54: ipv6_join_group (41/20)
+Mar 15 15:05:10 (1458025510.894497) sockd[6275]: debug: sockopts_dump(): 55: ipv6_leave_anycast (41/28)
+Mar 15 15:05:10 (1458025510.894504) sockd[6275]: debug: sockopts_dump(): 56: ipv6_leave_group (41/21)
+Mar 15 15:05:10 (1458025510.894511) sockd[6275]: debug: sockopts_dump(): 57: ipv6_mtu (41/24)
+Mar 15 15:05:10 (1458025510.894518) sockd[6275]: debug: sockopts_dump(): 58: ipv6_mtu_discover (41/23)
+Mar 15 15:05:10 (1458025510.894526) sockd[6275]: debug: sockopts_dump(): 59: ipv6_nexthop (41/9)
+Mar 15 15:05:10 (1458025510.894526) sockd[6276]: debug: sockd_mmap(): mmap(2)'ing 1088 bytes from fd 21, mapping = (nil)
+Mar 15 15:05:10 (1458025510.894532) sockd[6275]: debug: sockopts_dump(): 60: ipv6_pktinfo (41/50)
+Mar 15 15:05:10 (1458025510.894542) sockd[6275]: debug: sockopts_dump(): 61: ipv6_router_alert (41/22)
+Mar 15 15:05:10 (1458025510.894549) sockd[6275]: debug: sockopts_dump(): 62: ipv6_rthdr (41/57)
+Mar 15 15:05:10 (1458025510.894548) sockd[6276]: debug: sockd_shmat(): attached to mstats_shmid 1 of size 1088 at 0x7ffff7ff4000, 0 clients, filename /tmp/.sockdshmemXXXX5oxnuQ.1
+Mar 15 15:05:10 (1458025510.894557) sockd[6275]: debug: sockopts_dump(): 63: ipv6_rthdrdstopts (41/55)
+Mar 15 15:05:10 (1458025510.894571) sockd[6275]: debug: sockopts_dump(): 64: ipv6_tclass (41/67)
+Mar 15 15:05:10 (1458025510.894578) sockd[6275]: debug: sockopts_dump(): 65: ipv6_unicast_hops (41/16)
+Mar 15 15:05:10 (1458025510.894585) sockd[6275]: debug: sockopts_dump(): 66: ipv6_v6only (41/26)
+Mar 15 15:05:10 (1458025510.894593) sockd[6275]: debug: sockopts_dump(): 67: ipv6_xfrm_policy (41/35)
+Mar 15 15:05:10 (1458025510.894600) sockd[6275]: debug: sockopts_dump(): 68: so_error (1/4)
+Mar 15 15:05:10 (1458025510.894607) sockd[6275]: debug: sockopts_dump(): 69: so_reuseaddr (1/2)
+Mar 15 15:05:10 (1458025510.894614) sockd[6275]: debug: sockopts_dump(): 70: so_reuseport (1/15)
+Mar 15 15:05:10 (1458025510.894615) sockd[6276]: debug: addchild(): I am a new monitor-child with data-pipe 0 and ack-pipe 3
+Mar 15 15:05:10 (1458025510.894621) sockd[6275]: debug: sockopts_dump(): 71: so_acceptconn (1/30)
+Mar 15 15:05:10 (1458025510.894630) sockd[6275]: debug: sockopts_dump(): 72: so_type (1/3)
+Mar 15 15:05:10 (1458025510.894636) sockd[6276]: debug: sockd_print_child_ready_message(): I'm monitor-child and ready to serve with 4086 free fds and 1 free slot
+Mar 15 15:05:10 (1458025510.894638) sockd[6275]: debug: sockopts_dump(): 73: ip_add_membership (0/35)
+Mar 15 15:05:10 (1458025510.894654) sockd[6275]: debug: sockopts_dump(): 74: ip_add_source_membership (0/39)
+Mar 15 15:05:10 (1458025510.894661) sockd[6275]: debug: sockopts_dump(): 75: ip_block_source (0/38)
+Mar 15 15:05:10 (1458025510.894669) sockd[6275]: debug: sockopts_dump(): 76: ip_drop_membership (0/36)
+Mar 15 15:05:10 (1458025510.894676) sockd[6275]: debug: sockopts_dump(): 77: ip_drop_membership (0/36)
+Mar 15 15:05:10 (1458025510.894683) sockd[6275]: debug: sockopts_dump(): 78: ip_drop_source_membership (0/40)
+Mar 15 15:05:10 (1458025510.894685) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:10 (1458025510.894690) sockd[6275]: debug: sockopts_dump(): 79: ip_drop_source_membership (0/40)
+Mar 15 15:05:10 (1458025510.894701) sockd[6275]: debug: sockopts_dump(): 80: ip_hdrincl (0/3)
+Mar 15 15:05:10 (1458025510.894708) sockd[6275]: debug: sockopts_dump(): 81: ip_hdrincl (0/3)
+Mar 15 15:05:10 (1458025510.894716) sockd[6275]: debug: sockopts_dump(): 82: ip_multicast_if (0/32)
+Mar 15 15:05:10 (1458025510.894725) sockd[6275]: debug: sockopts_dump(): 83: ip_multicast_loop (0/34)
+Mar 15 15:05:10 (1458025510.894736) sockd[6275]: debug: sockopts_dump(): 84: ip_multicast_ttl (0/33)
+Mar 15 15:05:10 (1458025510.894747) sockd[6275]: debug: sockopts_dump(): 85: ip_options (0/4)
+Mar 15 15:05:10 (1458025510.894758) sockd[6275]: debug: sockopts_dump(): 86: ip_recvtos (0/13)
+Mar 15 15:05:10 (1458025510.894769) sockd[6275]: debug: sockopts_dump(): 87: ip_recvttl (0/12)
+Mar 15 15:05:10 (1458025510.894780) sockd[6275]: debug: sockopts_dump(): 88: ip_recvttl (0/12)
+Mar 15 15:05:10 (1458025510.894789) sockd[6275]: debug: sockopts_dump(): 89: ip_unblock_source (0/37)
+Mar 15 15:05:10 (1458025510.894796) sockd[6275]: debug: sockopts_dump(): 90: ipv6_multicast_hops (41/18)
+Mar 15 15:05:10 (1458025510.894803) sockd[6275]: debug: sockopts_dump(): 91: ipv6_multicast_if (41/17)
+Mar 15 15:05:10 (1458025510.894810) sockd[6275]: debug: sockopts_dump(): 92: ipv6_multicast_loop (41/19)
+Mar 15 15:05:10 (1458025510.894817) sockd[6275]: debug: sockopts_dump(): 93: ipv6_add_membership (41/20)
+Mar 15 15:05:10 (1458025510.894824) sockd[6275]: debug: sockopts_dump(): 94: ipv6_drop_membership (41/21)
+Mar 15 15:05:10 (1458025510.894831) sockd[6275]: debug: sockopts_dump(): 95: ipv6_recvdstopts (41/58)
+Mar 15 15:05:10 (1458025510.894838) sockd[6275]: debug: sockopts_dump(): 96: ipv6_recverr (41/25)
+Mar 15 15:05:10 (1458025510.894846) sockd[6275]: debug: sockopts_dump(): 97: ipv6_recvhoplimit (41/51)
+Mar 15 15:05:10 (1458025510.894853) sockd[6275]: debug: sockopts_dump(): 98: ipv6_recvhopopts (41/53)
+Mar 15 15:05:10 (1458025510.894860) sockd[6275]: debug: sockopts_dump(): 99: ipv6_recvpktinfo (41/49)
+Mar 15 15:05:10 (1458025510.894872) sockd[6275]: debug: sockopts_dump(): 100: ipv6_recvrthdr (41/56)
+Mar 15 15:05:10 (1458025510.894880) sockd[6275]: debug: sockopts_dump(): 101: ipv6_recvtclass (41/66)
+Mar 15 15:05:10 (1458025510.894888) sockd[6275]: debug: sockopts_dump(): socket option symbolic values (32 entries):
+Mar 15 15:05:10 (1458025510.894897) sockd[6275]: debug: sockopts_dump(): 00: ip_tos.dscp: af11 (10)
+Mar 15 15:05:10 (1458025510.894905) sockd[6275]: debug: sockopts_dump(): 01: ip_tos.dscp: af12 (12)
+Mar 15 15:05:10 (1458025510.894913) sockd[6275]: debug: sockopts_dump(): 02: ip_tos.dscp: af13 (14)
+Mar 15 15:05:10 (1458025510.894920) sockd[6275]: debug: sockopts_dump(): 03: ip_tos.dscp: af21 (18)
+Mar 15 15:05:10 (1458025510.894929) sockd[6275]: debug: sockopts_dump(): 04: ip_tos.dscp: af22 (20)
+Mar 15 15:05:10 (1458025510.894937) sockd[6275]: debug: sockopts_dump(): 05: ip_tos.dscp: af23 (22)
+Mar 15 15:05:10 (1458025510.894944) sockd[6275]: debug: sockopts_dump(): 06: ip_tos.dscp: af31 (26)
+Mar 15 15:05:10 (1458025510.894951) sockd[6275]: debug: sockopts_dump(): 07: ip_tos.dscp: af32 (28)
+Mar 15 15:05:10 (1458025510.894959) sockd[6275]: debug: sockopts_dump(): 08: ip_tos.dscp: af33 (30)
+Mar 15 15:05:10 (1458025510.894970) sockd[6275]: debug: sockopts_dump(): 09: ip_tos.dscp: af41 (34)
+Mar 15 15:05:10 (1458025510.894978) sockd[6275]: debug: sockopts_dump(): 10: ip_tos.dscp: af42 (36)
+Mar 15 15:05:10 (1458025510.894985) sockd[6275]: debug: sockopts_dump(): 11: ip_tos.dscp: af43 (38)
+Mar 15 15:05:10 (1458025510.894993) sockd[6275]: debug: sockopts_dump(): 12: ip_tos.dscp: cs0 (0)
+Mar 15 15:05:10 (1458025510.895001) sockd[6275]: debug: sockopts_dump(): 13: ip_tos.dscp: cs1 (8)
+Mar 15 15:05:10 (1458025510.895013) sockd[6275]: debug: sockopts_dump(): 14: ip_tos.dscp: cs2 (16)
+Mar 15 15:05:10 (1458025510.895024) sockd[6275]: debug: sockopts_dump(): 15: ip_tos.dscp: cs3 (24)
+Mar 15 15:05:10 (1458025510.895036) sockd[6275]: debug: sockopts_dump(): 16: ip_tos.dscp: cs4 (32)
+Mar 15 15:05:10 (1458025510.895048) sockd[6275]: debug: sockopts_dump(): 17: ip_tos.dscp: cs5 (40)
+Mar 15 15:05:10 (1458025510.895058) sockd[6275]: debug: sockopts_dump(): 18: ip_tos.dscp: cs6 (48)
+Mar 15 15:05:10 (1458025510.895066) sockd[6275]: debug: sockopts_dump(): 19: ip_tos.dscp: cs7 (56)
+Mar 15 15:05:10 (1458025510.895073) sockd[6275]: debug: sockopts_dump(): 20: ip_tos.dscp: ef (46)
+Mar 15 15:05:10 (1458025510.895081) sockd[6275]: debug: sockopts_dump(): 21: ip_tos.prec: netcontrol (7)
+Mar 15 15:05:10 (1458025510.895088) sockd[6275]: debug: sockopts_dump(): 22: ip_tos.prec: internetcontrol (6)
+Mar 15 15:05:10 (1458025510.895096) sockd[6275]: debug: sockopts_dump(): 23: ip_tos.prec: critic_ecp (5)
+Mar 15 15:05:10 (1458025510.895103) sockd[6275]: debug: sockopts_dump(): 24: ip_tos.prec: flashoverride (4)
+Mar 15 15:05:10 (1458025510.895111) sockd[6275]: debug: sockopts_dump(): 25: ip_tos.prec: flash (3)
+Mar 15 15:05:10 (1458025510.895118) sockd[6275]: debug: sockopts_dump(): 26: ip_tos.prec: immediate (2)
+Mar 15 15:05:10 (1458025510.895125) sockd[6275]: debug: sockopts_dump(): 27: ip_tos.prec: priority (1)
+Mar 15 15:05:10 (1458025510.895133) sockd[6275]: debug: sockopts_dump(): 28: ip_tos.prec: routine (0)
+Mar 15 15:05:10 (1458025510.895140) sockd[6275]: debug: sockopts_dump(): 29: ip_tos.tos: lowdelay (8)
+Mar 15 15:05:10 (1458025510.895147) sockd[6275]: debug: sockopts_dump(): 30: ip_tos.tos: throughput (4)
+Mar 15 15:05:10 (1458025510.895155) sockd[6275]: debug: sockopts_dump(): 31: ip_tos.tos: reliability (2)
+Mar 15 15:05:10 (1458025510.895186) sockd[6275]: debug: childcheck(): current # of free negotiate-child slots is 0, configured minimum is 96: need to add more negotiate-children
+Mar 15 15:05:10 (1458025510.895195) sockd[6275]: debug: addchild(): type is negotiate-child
+Mar 15 15:05:10 (1458025510.895220) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.895228) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.895239) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.895252) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.895261) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.895268) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.895276) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.895283) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.895291) sockd[6275]: debug: addchild(): highest fd in use at the moment: 22
+Mar 15 15:05:10 (1458025510.896742) sockd[6277]: debug: postconfigloadinit(): I am a negotiate-child
+Mar 15 15:05:10 (1458025510.896789) sockd[6277]: debug: sockd_setcpusettings(): old cpu scheduling policy/priority: other/0, new: other/0
+Mar 15 15:05:10 (1458025510.896805) sockd[6277]: debug: negotiate_postconfigload()
+Mar 15 15:05:10 (1458025510.896855) sockd[6277]: debug: addchild(): I am a new negotiate-child with data-pipe 0 and ack-pipe 3
+Mar 15 15:05:10 (1458025510.896865) sockd[6275]: debug: addchild(): created new negotiate-child with pid 6277, data-pipe 18 and ack-pipe 21.  Minimum rcvbuf: 23128, set: 46256 and 46256.  Minimum sndbuf: 2220288, set: 4440576 and 4440576
+Mar 15 15:05:10 (1458025510.896885) sockd[6277]: debug: sockd_print_child_ready_message(): I'm negotiate-child and ready to serve with 4086 free fds and 96 free slots
+Mar 15 15:05:10 (1458025510.896897) sockd[6275]: debug: childcheck(): added child, pid 6277
+Mar 15 15:05:10 (1458025510.896929) sockd[6277]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (0, 3, ), bufrset = 0x1a7d360 (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:05:10 (1458025510.896943) sockd[6275]: debug: childcheck(): current # of free request-child slots is 0, configured minimum is 1: need to add more request-children
+Mar 15 15:05:10 (1458025510.896954) sockd[6275]: debug: addchild(): type is request-child
+Mar 15 15:05:10 (1458025510.896979) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.896987) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.896997) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.897004) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.897013) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.897023) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.897036) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.897046) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.897061) sockd[6275]: debug: addchild(): highest fd in use at the moment: 24
+Mar 15 15:05:10 (1458025510.898518) sockd[6278]: debug: postconfigloadinit(): I am a request-child
+Mar 15 15:05:10 (1458025510.898574) sockd[6278]: debug: sockd_setcpusettings(): old cpu scheduling policy/priority: other/0, new: other/0
+Mar 15 15:05:10 (1458025510.898581) sockd[6275]: debug: addchild(): created new request-child with pid 6278, data-pipe 20 and ack-pipe 23.  Minimum rcvbuf: 36800, set: 73600 and 73600.  Minimum sndbuf: 36800, set: 73600 and 73600
+Mar 15 15:05:10 (1458025510.898595) sockd[6278]: debug: request_postconfigload()
+Mar 15 15:05:10 (1458025510.898608) sockd[6275]: debug: childcheck(): added child, pid 6278
+Mar 15 15:05:10 (1458025510.898651) sockd[6275]: debug: childcheck(): current # of free io-child slots is 0, configured minimum is 32: need to add more io-children
+Mar 15 15:05:10 (1458025510.898659) sockd[6275]: debug: addchild(): type is io-child
+Mar 15 15:05:10 (1458025510.898676) sockd[6278]: debug: addchild(): I am a new request-child with data-pipe 0 and ack-pipe 3
+Mar 15 15:05:10 (1458025510.898689) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.898700) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.898718) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.898720) sockd[6278]: debug: sockd_print_child_ready_message(): I'm request-child and ready to serve with 4086 free fds and 1 free slot
+Mar 15 15:05:10 (1458025510.898730) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.898745) sockd[6275]: debug: sockd_priv(): switching privilege 6 on
+Mar 15 15:05:10 (1458025510.898755) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.898768) sockd[6275]: debug: sockd_priv(): switching privilege 6 off
+Mar 15 15:05:10 (1458025510.898771) sockd[6278]: debug: pre-select: nfds = 4, rset = 0x1a7d190 (0, 3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:05:10 (1458025510.898778) sockd[6275]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.898795) sockd[6275]: debug: addchild(): highest fd in use at the moment: 26
+Mar 15 15:05:10 (1458025510.900129) sockd[6279]: debug: postconfigloadinit(): I am a io-child
+Mar 15 15:05:10 (1458025510.900194) sockd[6279]: debug: sockd_setcpusettings(): old cpu scheduling policy/priority: other/0, new: other/0
+Mar 15 15:05:10 (1458025510.900198) sockd[6275]: debug: addchild(): created new io-child with pid 6279, data-pipe 22 and ack-pipe 25.  Minimum rcvbuf: 36800, set: 73600 and 73600.  Minimum sndbuf: 1177600, set: 2355200 and 2355200
+Mar 15 15:05:10 (1458025510.900216) sockd[6279]: debug: io_postconfigload(): ioc = 32
+Mar 15 15:05:10 (1458025510.900223) sockd[6275]: debug: childcheck(): added child, pid 6279
+Mar 15 15:05:10 (1458025510.900251) sockd[6275]: debug: max limits: processes: 31745 (31741 free), files: 4096 (4074 free), negotiate-child-slots: 195552, request-child-slots: 2037, io-child-slots: 65184 (max clients limited by open file limit)
+Mar 15 15:05:10 (1458025510.900259) sockd[6275]: info: Dante/server[1/1] v1.4.1 running
+Mar 15 15:05:10 (1458025510.900271) sockd[6275]: debug: calling select().  Free negc: 96, reqc: 1, ioc: 32
+Mar 15 15:05:10 (1458025510.900327) sockd[6279]: debug: addchild(): I am a new io-child with data-pipe 0 and ack-pipe 3
+Mar 15 15:05:10 (1458025510.900390) sockd[6279]: debug: sockd_priv(): switching privilege 4 on
+Mar 15 15:05:10 (1458025510.900403) sockd[6279]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.900431) sockd[6279]: debug: run_io(): created raw socket, fd 4
+Mar 15 15:05:10 (1458025510.900460) sockd[6279]: debug: sockd_priv(): switching privilege 4 off
+Mar 15 15:05:10 (1458025510.900469) sockd[6279]: debug: sockd_setugid(): old uid/gid: 0/0, new: 0/0
+Mar 15 15:05:10 (1458025510.900492) sockd[6279]: debug: io_allocated(): allocated for tcp: 0, udp: 0
+Mar 15 15:05:10 (1458025510.900522) sockd[6279]: debug: sockd_print_child_ready_message(): I'm io-child and ready to serve with 4085 free fds and 32 free slots
+Mar 15 15:05:10 (1458025510.900537) sockd[6279]: debug: run_io(): first select; readable/connected?
+Mar 15 15:05:10 (1458025510.900545) sockd[6279]: debug: io_gettimeout(): last_time = 0, tnow = 341649, last_timeout_isset = 0, last_timeout = 0.000000
+Mar 15 15:05:10 (1458025510.900562) sockd[6279]: debug: io_allocated(): allocated for tcp: 0, udp: 0
+Mar 15 15:05:10 (1458025510.900606) sockd[6279]: debug: pre-select: nfds = 4, rset = 0x1a7d800 (0, 3, ), bufrset = 0x1a7d3e0 (), buffwset = 0x1a7d1d0 (), wset = 0x1a7de30 (), xset = 0x1a7e040 (), timeout = 0x0
+Mar 15 15:05:13 (1458025513.748403) sockd[6275]: debug: pre-select: nfds = 26, rset = 0x1a7d210 (12, 14, 15, 18, 20, 21, 23, 25, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:05:16 (1458025516.617613) sockd[6275]: debug: post-select returned 1 (errno: no system error) nfds = 26, rset = 0x1a7d210 (12, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:05:16 (1458025516.617771) sockd[6275]: debug: main(): selectn() returned 1 (no system error)
+Mar 15 15:05:20 (1458025520.904836) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:20 (1458025520.904969) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:05:20 (1458025520.904985) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341659.430171, tnow = 341659.440643
+Mar 15 15:05:20 (1458025520.904994) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.989528s (now)
+Mar 15 15:05:20 (1458025520.905005) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341659.430171, tnow = 341659.440643
+Mar 15 15:05:20 (1458025520.905013) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.989528s (now)
+Mar 15 15:05:20 (1458025520.905021) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.989528s
+Mar 15 15:05:20 (1458025520.905031) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:05:20 (1458025520.905066) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently off, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:20 (1458025520.905104) sockd[6276]: warning: monitor(1): alarm/data [: 0.0.0.0/0 -> 0.0.0.0/0 port range 1 - 65535 external.recv: 0/1 in 10s.  Session count: 0
+Mar 15 15:05:20 (1458025520.905118) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently off, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:20 (1458025520.905130) sockd[6276]: warning: monitor(1): alarm/data [: 0.0.0.0/0 -> 0.0.0.0/0 port range 1 - 65535 internal.send: 0/1 in 10s.  Session count: 0
+Mar 15 15:05:20 (1458025520.909373) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:05:20 (1458025520.978412) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:05:20 (1458025520.978450) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:30 (1458025530.988577) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:30 (1458025530.988650) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:05:30 (1458025530.988664) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341669.440643, tnow = 341669.524324
+Mar 15 15:05:30 (1458025530.988673) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.916319s (now)
+Mar 15 15:05:30 (1458025530.988725) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341669.440643, tnow = 341669.524324
+Mar 15 15:05:30 (1458025530.988738) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.916319s (now)
+Mar 15 15:05:30 (1458025530.988747) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.916319s
+Mar 15 15:05:30 (1458025530.988756) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:05:30 (1458025530.988771) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:30 (1458025530.988781) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:30 (1458025530.991931) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:05:31 (1458025531.060812) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:05:31 (1458025531.060880) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:41 (1458025541.071006) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:41 (1458025541.071103) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:05:41 (1458025541.071117) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341679.524324, tnow = 341679.606777
+Mar 15 15:05:41 (1458025541.071127) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.917547s (now)
+Mar 15 15:05:41 (1458025541.071137) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341679.524324, tnow = 341679.606777
+Mar 15 15:05:41 (1458025541.071145) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.917547s (now)
+Mar 15 15:05:41 (1458025541.071169) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.917547s
+Mar 15 15:05:41 (1458025541.071178) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:05:41 (1458025541.071193) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:41 (1458025541.071203) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:41 (1458025541.074535) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:05:41 (1458025541.143171) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:05:41 (1458025541.143196) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:51 (1458025551.153331) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:05:51 (1458025551.153436) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:05:51 (1458025551.153453) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341689.606777, tnow = 341689.689113
+Mar 15 15:05:51 (1458025551.153464) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.917664s (now)
+Mar 15 15:05:51 (1458025551.153475) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341689.606777, tnow = 341689.689113
+Mar 15 15:05:51 (1458025551.153485) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.917664s (now)
+Mar 15 15:05:51 (1458025551.153495) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.917664s
+Mar 15 15:05:51 (1458025551.153505) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:05:51 (1458025551.153522) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:51 (1458025551.153555) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:05:51 (1458025551.156981) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:05:51 (1458025551.226034) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:05:51 (1458025551.226074) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:01 (1458025561.236212) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:01 (1458025561.236282) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:06:01 (1458025561.236297) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341699.689113, tnow = 341699.771957
+Mar 15 15:06:01 (1458025561.236308) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.917156s (now)
+Mar 15 15:06:01 (1458025561.236319) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341699.689113, tnow = 341699.771957
+Mar 15 15:06:01 (1458025561.236328) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.917156s (now)
+Mar 15 15:06:01 (1458025561.236367) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.917156s
+Mar 15 15:06:01 (1458025561.236378) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:06:01 (1458025561.236407) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:01 (1458025561.236417) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:01 (1458025561.239655) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:06:01 (1458025561.308488) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:06:01 (1458025561.308527) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:11 (1458025571.318657) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:11 (1458025571.318758) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:06:11 (1458025571.318773) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341709.771957, tnow = 341709.854432
+Mar 15 15:06:11 (1458025571.318782) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.917525s (now)
+Mar 15 15:06:11 (1458025571.318828) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341709.771957, tnow = 341709.854432
+Mar 15 15:06:11 (1458025571.318840) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.917525s (now)
+Mar 15 15:06:11 (1458025571.318849) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.917525s
+Mar 15 15:06:11 (1458025571.318857) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:06:11 (1458025571.318875) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:11 (1458025571.318884) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:11 (1458025571.322155) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:06:11 (1458025571.390951) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:06:11 (1458025571.390989) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:21 (1458025581.401113) sockd[6276]: debug: post-select returned 0 (errno: no system error) nfds = 4, rset = 0x1a7d150 (), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:21 (1458025581.401234) sockd[6276]: debug: checkmonitors(): [
+Mar 15 15:06:21 (1458025581.401256) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341719.854432, tnow = 341719.936915
+Mar 15 15:06:21 (1458025581.401271) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the internal interface for sending data.  Should be checked in -1.917517s (now)
+Mar 15 15:06:21 (1458025581.401281) sockd[6276]: debug: timetillcheck(): TIMERCALC: tshouldbechecked = 341719.854432, tnow = 341719.936915
+Mar 15 15:06:21 (1458025581.401289) sockd[6276]: debug: timetillcheck(): monitor #1 has a data-alarm configured on the external interface for receiving data.  Should be checked in -1.917517s (now)
+Mar 15 15:06:21 (1458025581.401297) sockd[6276]: debug: timetillcheck(): first check for monitor #1 is in -1.917517s
+Mar 15 15:06:21 (1458025581.401305) sockd[6276]: debug: checkmonitors(): time to check alarm on monitor #1, shmid 1.  Configured alarms: 1, hastimedout: 20
+Mar 15 15:06:21 (1458025581.401321) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side external.recv.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:21 (1458025581.401338) sockd[6276]: debug: alarmcheck_data(): checking monitor #1 on side internal.send.  Alarm is currently on, alarm->bytes is 0, lastio is 0.000000
+Mar 15 15:06:21 (1458025581.404672) sockd[6276]: debug: buf: { "user_list": [ ] }
+Mar 15 15:06:21 (1458025581.473678) sockd[6276]: debug: checkmonitors(): ]
+Mar 15 15:06:21 (1458025581.473718) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:23 (1458025583.048901) sockd[6279]: debug: post-select returned 1 (errno: no system error) nfds = 4, rset = 0x1a7d800 (3, ), bufrset = 0x1a7d3e0 (), buffwset = 0x1a7d1d0 (), wset = 0x1a7de30 (), xset = 0x1a7e040 (), timeout = 0x0
+Mar 15 15:06:23 (1458025583.049039) sockd[6279]: debug: sockd_pushsignal(): pushed signal 1 from pid 0.  Number of signals on the stack is now 1
+Mar 15 15:06:23 (1458025583.049079) sockd[6279]: alert: run_io(): mother unexpectedly closed the IPC control channel
+Mar 15 15:06:23 (1458025583.049099) sockd[6279]: debug: io_allocated(): allocated for tcp: 0, udp: 0
+Mar 15 15:06:23 (1458025583.049108) sockd[6279]: debug: run_io(): no connection to mother, no clients; exiting
+Mar 15 15:06:23 (1458025583.049117) sockd[6279]: debug: sockdexit(): insignal = 0
+Mar 15 15:06:23 (1458025583.049125) sockd[6279]: debug: io-child: shutting down
+<no localtime available> (1458025583.049596) sockd[6278]: debug: sockd_pushsignal(): pushed signal 1 from pid 0.  Number of signals on the stack is now 1
+Mar 15 15:06:23 (1458025583.049659) sockd[6278]: debug: post-select returned -1 (errno: Interrupted system call) nfds = 4, rset = 0x1a7d190 (0, 3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:06:23 (1458025583.049720) sockd[6278]: debug: sockd_handledsignals(): signal #1 on the stack is signal 1
+Mar 15 15:06:23 (1458025583.049730) sockd[6278]: debug: sockd_handledsignals(): signals left on the stack after popping signal 1: 0
+Mar 15 15:06:23 (1458025583.049742) sockd[6278]: debug: SIGHUP [: processing signal 1
+Mar 15 15:06:23 (1458025583.049761) sockd[6278]: warning: sighup_child(): Strange.  Received a SIGHUP signal, but the size of mother's shmemconfig is zero, which does not make sense.  Ignoring it
+Mar 15 15:06:23 (1458025583.049778) sockd[6278]: debug: pre-select: nfds = 4, rset = 0x1a7d190 (0, 3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+<no localtime available> (1458025583.049813) sockd[6277]: debug: sockd_pushsignal(): pushed signal 1 from pid 0.  Number of signals on the stack is now 1
+Mar 15 15:06:23 (1458025583.049863) sockd[6277]: debug: post-select returned -1 (errno: Interrupted system call) nfds = 4, rset = 0x1a7d150 (0, 3, ), bufrset = 0x1a7d360 (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:06:23 (1458025583.049918) sockd[6277]: debug: sockd_handledsignals(): signal #1 on the stack is signal 1
+Mar 15 15:06:23 (1458025583.049928) sockd[6277]: debug: sockd_handledsignals(): signals left on the stack after popping signal 1: 0
+Mar 15 15:06:23 (1458025583.049936) sockd[6277]: debug: SIGHUP [: processing signal 1
+Mar 15 15:06:23 (1458025583.049947) sockd[6277]: warning: sighup_child(): Strange.  Received a SIGHUP signal, but the size of mother's shmemconfig is zero, which does not make sense.  Ignoring it
+Mar 15 15:06:23 (1458025583.049968) sockd[6277]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (0, 3, ), bufrset = 0x1a7d360 (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+<no localtime available> (1458025583.050004) sockd[6276]: debug: sockd_pushsignal(): pushed signal 1 from pid 0.  Number of signals on the stack is now 1
+Mar 15 15:06:23 (1458025583.050036) sockd[6276]: debug: post-select returned -1 (errno: Interrupted system call) nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:23 (1458025583.050065) sockd[6276]: debug: sockd_handledsignals(): signal #1 on the stack is signal 1
+Mar 15 15:06:23 (1458025583.050074) sockd[6276]: debug: sockd_handledsignals(): signals left on the stack after popping signal 1: 0
+Mar 15 15:06:23 (1458025583.050086) sockd[6276]: debug: SIGHUP [: processing signal 1
+Mar 15 15:06:23 (1458025583.050097) sockd[6276]: warning: sighup_child(): Strange.  Received a SIGHUP signal, but the size of mother's shmemconfig is zero, which does not make sense.  Ignoring it
+Mar 15 15:06:23 (1458025583.050112) sockd[6276]: debug: pre-select: nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:23 (1458025583.050145) sockd[6278]: debug: post-select returned 1 (errno: no system error) nfds = 4, rset = 0x1a7d190 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:06:23 (1458025583.050166) sockd[6278]: alert: run_request(): mother unexpectedly closed the IPC control channel
+Mar 15 15:06:23 (1458025583.050177) sockd[6278]: debug: sockdexit(): insignal = 0
+Mar 15 15:06:23 (1458025583.050185) sockd[6278]: debug: request-child: shutting down
+Mar 15 15:06:23 (1458025583.050611) sockd[6277]: debug: post-select returned 1 (errno: no system error) nfds = 4, rset = 0x1a7d150 (3, ), bufrset = 0x1a7d360 (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 0x0
+Mar 15 15:06:23 (1458025583.050638) sockd[6277]: alert: run_negotiate(): mother unexpectedly closed the IPC control channel
+Mar 15 15:06:23 (1458025583.050650) sockd[6277]: debug: sockdexit(): insignal = 0
+Mar 15 15:06:23 (1458025583.050658) sockd[6277]: debug: negotiate-child: shutting down
+Mar 15 15:06:23 (1458025583.056385) sockd[6276]: debug: post-select returned 1 (errno: no system error) nfds = 4, rset = 0x1a7d150 (3, ), bufrset = (nil) (), buffwset = (nil) (), wset = (nil) (), xset = (nil) (), timeout = 10.000000s
+Mar 15 15:06:23 (1458025583.056416) sockd[6276]: alert: run_monitor(): mother unexpectedly closed the IPC control channel: mother unexpectedly exited
+Mar 15 15:06:23 (1458025583.056427) sockd[6276]: debug: sockdexit(): insignal = 0
+Mar 15 15:06:23 (1458025583.056444) sockd[6276]: debug: monitor-child: shutting down
