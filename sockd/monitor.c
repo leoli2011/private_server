@@ -84,7 +84,7 @@ alarmcheck_disconnect(const monitor_t *monitor, alarm_disconnect_t *alarm,
 #define OP_DISCONNECT      (2)
 #define OP_REMOVE_SESSION  (4)
 
-#define IP_PORT "http://115.182.92.109:8081"
+#define IP_PORT "http://10.118.30.192:443"
 
 static char *op2string(const size_t op);
 
