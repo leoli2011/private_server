@@ -1,4 +1,4 @@
-flags:  '--disable-client'
+flags:  '--disable-client' '--without-gssapi' '--without-krb5--without-ldap'
 CC: gcc 
 CFLAGS:  -O2 -ggdb -pipe  
 CPP: gcc -E 
