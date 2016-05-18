@@ -2148,7 +2148,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                 json_object *conn_update = json_object_new_object();
                 json_object *user_list = json_object_new_array();
                 json_object *dip = json_object_new_array();
-     	   	    slog(LOG_DEBUG, "alarm ##########:uif->user_cnt=%d, %x\n", uif->user_cnt, uif->alarm[0].uid);
+     	   	    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d, %x\n", uif->user_cnt, uif->alarm[0].uid);
 
                 for (i = 0; i < uif->user_cnt; i++) {
                     json_object *user_info = json_object_new_object();
@@ -2167,7 +2167,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
 
      	   	    post_str = json_object_to_json_string(conn_update);
 
-     	   	    slog(LOG_DEBUG, "post_buf: %s\n", post_str);
+     	   	    slog(LOG_ALARM, "post_buf: %s\n", post_str);
 				}
 
  	       break;
@@ -2176,7 +2176,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                   json_object *netcard_update = json_object_new_object();
                   json_object *card_list = json_object_new_array();
                   for (i = 0; i < sockscf.external.addrc; i++) {
-     	   	            slog(LOG_DEBUG, "last_tx=%lu, tx=%lu,sub=%lu last_rx=%lu, rx=%lu, sub=%lu\n",
+     	   	            slog(LOG_ALARM, "last_tx=%lu, tx=%lu,sub=%lu last_rx=%lu, rx=%lu, sub=%lu\n",
                                 g_stat[i].last_tx, g_stat[i].tx, g_stat[i].last_tx - g_stat[i].tx,
                                 g_stat[i].last_rx, g_stat[i].rx, g_stat[i].last_rx - g_stat[i].rx);
                         json_object *card = json_object_new_object();
@@ -2203,7 +2203,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
   	          break;
 
 		default:
-     	  slog(LOG_DEBUG, "unknown type = %d\n", type);
+     	  slog(LOG_ALARM, "unknown type = %d\n", type);
 	}
 
  	curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);

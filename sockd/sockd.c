@@ -1102,86 +1102,7 @@ moncontrol(1);
                client.s  = acceptn(sockscf.internal.addrv[i].s,
                                    &client.from,
                                    &len);
-               /*
-               int uuid=0;
-               int rc = -1;
-               int aa=sizeof(int);
-               #define MPTCP_AUTH_UUID 29
-               slog(LOG_DEBUG, "################rc =%d %s\n", client.s,strerror(errno));
-               rc = getsockopt(client.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-               slog(LOG_DEBUG, "################rc =%d %s\n", rc,strerror(errno));
-               slog(LOG_DEBUG, "uid=%x %s \n", rc, perror());
-               */
 
-               /*
-      monitor_t *monitor = sockscf.monitor;
-      monitor_stats_t *mstats;
-      rule_t rule;
-
-      SASSERTX(monitor->mstats_shmid != 0);
-      SASSERTX(monitor->mstats       == NULL);
-
-      bzero(&rule, sizeof(rule));
-      COPY_MONITORFIELDS(monitor, &rule); 
-      rc = sockd_shmat(&rule, SHMEM_MONITOR);
-      COPY_MONITORFIELDS(&rule, monitor);
-
-      if (rc != 0) {
-         slog(LOG_DEBUG, "%s: could not attach to shmem segment of monitor #%lu",
-              function, (unsigned long)monitor->number);
-
-         continue;
-      }
-
-      SASSERTX(monitor->mstats != NULL);
-      mstats = &monitor->mstats->object.monitor;
-      socks_lock(sockscf.shmemfd, (off_t)monitor->mstats_shmid, 1, 1, 1);
-      MUNPROTECT_SHMEMHEADER(monitor->mstats);
-
-      uint32_t user_cnt  =  mstats->user_info.user_cnt;
-      mstats->user_info.alarm[user_cnt].uid = uuid;
-      mstats->user_info.alarm[user_cnt].sess_cnt += 1;
-      mstats->user_info.user_cnt += 1;
-      MPROTECT_SHMEMHEADER(monitor->mstats);
-
-      socks_unlock(sockscf.shmemfd, (off_t)monitor->mstats_shmid, 1);
-
-
-
-      */
-               /*
-               int uuid=0;
-               int aa=sizeof(int);
-               #define MPTCP_AUTH_UUID 29
-               getsockopt(client.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-//               slog("server: got connection from src %d, uuid:%x\n", client.s, uuid);
-               monitor_t *monitor;
-               monitor_stats_t *mstats;
-               monitor = sockscf.monitor;
-               int rc;
-
-               */
-               /*
-      rule_t rule;
-      bzero(&rule, sizeof(rule));
-      COPY_MONITORFIELDS(monitor, &rule);
-      rc = sockd_shmat(&rule, SHMEM_MONITOR);
-      COPY_MONITORFIELDS(&rule, monitor);
-      socks_lock(sockscf.shmemfd, (off_t)monitor->mstats_shmid, 1, 1, 1);
-      */
-
-               //mstats = &monitor->mstats->object.monitor;
-               //uint32_t user_cnt  =  mstats->user_info.user_cnt;
-               //mstats->user_info.alarm[user_cnt].uid = uuid;
-               //mstats->user_info.alarm[user_cnt].sess_cnt += 1;
-               //mstats->user_info.user_cnt += 1;
-               /*
-               user_info_t uif;
-               int user_cnt = 0;
-               uif.alarm[user_cnt].uid = uuid;
-               uif.alarm[user_cnt].sess_cnt += 1;
-               uif.user_cnt += 1;
-               */
                client.to = sockscf.internal.addrv[i].addr;
 
                if (client.s  == -1) {
@@ -1215,6 +1136,7 @@ case ENFILE:
                      case EBADF:
                      case EFAULT:
                      case EINVAL:
+
                         SERRX(errno);
 
                      default:
@@ -1240,11 +1162,11 @@ case ENFILE:
                int aa=sizeof(int);
                #define MPTCP_AUTH_UUID 29
                rc = getsockopt(client.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-               slog(LOG_DEBUG, "################%s rc =%d %s, uid=%x\n", function, rc, strerror(errno), uuid);
-               slog(LOG_DEBUG, "################accepted tcp client %s on address %s, fd %d",
+               slog(LOG_ALARM, "########accepted tcp client %s on address %s, fd=%d, uuid=%x, rc=%d\n",
                     sockaddr2string(&client.from, astr, sizeof(astr)),
                     sockaddr2string(&sockscf.internal.addrv[i].addr, NULL, 0),
-                    sockscf.internal.addrv[i].s);
+                    sockscf.internal.addrv[i].s,
+                    uuid, rc);
 
       monitor_t *monitor = sockscf.monitor;
       monitor_stats_t *mstats;
@@ -1258,20 +1180,21 @@ case ENFILE:
       if (monitor->mstats_shmid != 0) {
           SASSERTX(monitor->mstats != NULL);
           mstats = &monitor->mstats->object.monitor;
+          int j;
 
           uint32_t user_cnt  =  mstats->user_info.user_cnt;
-          for (i = 0; i < user_cnt; i++) {
-              if(mstats->user_info.alarm[i].uid == uuid)
+          for (j = 0; j < user_cnt; j++) {
+              if(mstats->user_info.alarm[j].uid == uuid)
                   break;
           }
 
-          mstats->user_info.alarm[i].uid = uuid;
-          mstats->user_info.alarm[i].sess_cnt += 1;
-          if (i == user_cnt) {
+          mstats->user_info.alarm[j].uid = uuid;
+          mstats->user_info.alarm[j].sess_cnt += 1;
+          if (j == user_cnt) {
             mstats->user_info.user_cnt += 1;
           }
 
-          slog(LOG_DEBUG, "accept:################ i = %d, user_cnt =%d, uid=%x\n", i,  user_cnt, uuid);
+          slog(LOG_ALARM, "accept:################ j = %d, user_cnt =%d, uid=%x\n", j,  user_cnt, uuid);
       }
 
       sockd_shmdt(&rule, SHMEM_MONITOR);
@@ -1283,8 +1206,7 @@ case ENFILE:
                   close(client.s);
                   continue;
                }
-
-               log_clientsend(&client.from, child, 0);
+log_clientsend(&client.from, child, 0);
 
                p = send_client(child->s, &client, NULL, 0);
 

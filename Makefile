@@ -126,7 +126,8 @@ AUTOMAKE = ${SHELL} /root/server/dante-1.4.1/missing --run automake-1.11
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS =  -O2 -ggdb -pipe 
+#CFLAGS =  -O2 -ggdb -pipe 
+CFLAGS = -O0 -g -ggdb -pipe
 CPP = gcc -E
 CPPFLAGS = -D_XOPEN_SOURCE=600 -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -DDEBUG=0 -D_FORTIFY_SOURCE=2
 CYGPATH_W = echo
