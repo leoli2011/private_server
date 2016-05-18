@@ -84,7 +84,7 @@ alarmcheck_disconnect(const monitor_t *monitor, alarm_disconnect_t *alarm,
 #define OP_DISCONNECT      (2)
 #define OP_REMOVE_SESSION  (4)
 
-#define IP_PORT "http://10.118.30.192:443"
+#define IP_PORT "http://10.118.30.166:443"
 
 static char *op2string(const size_t op);
 
@@ -1168,7 +1168,7 @@ int doreporter(CURL *handle, int type) {
     curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, &WriteMemoryCallback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *)&chunk);
-    curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+    curl_easy_setopt(handle, CURLOPT_VERBOSE, 0L);
 
     ret = curl_easy_perform(handle);
     if(ret != CURLE_OK) {
@@ -2095,16 +2095,10 @@ int get_cardinfo(char* ifname, uint64_t *tx, uint64_t *rx)
         goto exit;
 
 //	if ((*rx = rtnl_link_get_stat(link, RTNL_LINK_RX_BYTES)) < 0) {
-	if ((*rx = rtnl_link_get_stat(link, 2)) < 0) {
-		nl_perror(err, "Unable to delete link");
-		return err;
-	}
+	*rx = rtnl_link_get_stat(link, 2);
 
 	//if ((*tx = rtnl_link_get_stat(link, RTNL_LINK_TX_BYTES)) < 0) {
-	if ((*tx = rtnl_link_get_stat(link, 3)) < 0) {
-		nl_perror(err, "Unable to delete link");
-		return err;
-	}
+	*tx = rtnl_link_get_stat(link, 3);
 
     //printf("%s.%s %llu %llu \n", rtnl_link_get_name(link),
     //      rtnl_link_stat2str(RTNL_LINK_RX_BYTES, buf, sizeof(buf)), *rx, *tx);
@@ -2214,7 +2208,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
 
  	curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);
  	curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, &process_data);
- 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+ 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 0L);
  	curl_easy_perform(handle);
 
 	return 0;
