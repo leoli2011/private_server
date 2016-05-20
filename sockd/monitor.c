@@ -47,10 +47,73 @@
 #include "monitor.h"
 #include "config_parse.h"
 #include "netlink/netlink.h"
-#include "netlink/route/link.h"
+//#include "netlink/route/link.h"
 
 static const char rcsid[] =
 "$Id: monitor.c,v 1.125.4.8 2014/08/24 11:41:34 karls Exp $";
+
+typedef enum {
+	RTNL_LINK_RX_PACKETS,		/*!< Packets received */
+	RTNL_LINK_TX_PACKETS,		/*!< Packets sent */
+	RTNL_LINK_RX_BYTES,		/*!< Bytes received */
+	RTNL_LINK_TX_BYTES,		/*!< Bytes sent */
+	RTNL_LINK_RX_ERRORS,		/*!< Receive errors */
+	RTNL_LINK_TX_ERRORS,		/*!< Send errors */
+	RTNL_LINK_RX_DROPPED,		/*!< Received packets dropped */
+	RTNL_LINK_TX_DROPPED,		/*!< Packets dropped during transmit */
+	RTNL_LINK_RX_COMPRESSED,	/*!< Compressed packets received */
+	RTNL_LINK_TX_COMPRESSED,	/*!< Compressed packets sent */
+	RTNL_LINK_RX_FIFO_ERR,		/*!< Receive FIFO errors */
+	RTNL_LINK_TX_FIFO_ERR,		/*!< Send FIFO errors */
+	RTNL_LINK_RX_LEN_ERR,		/*!< Length errors */
+	RTNL_LINK_RX_OVER_ERR,		/*!< Over errors */
+	RTNL_LINK_RX_CRC_ERR,		/*!< CRC errors */
+	RTNL_LINK_RX_FRAME_ERR,		/*!< Frame errors */
+	RTNL_LINK_RX_MISSED_ERR,	/*!< Missed errors */
+	RTNL_LINK_TX_ABORT_ERR,		/*!< Aborted errors */
+	RTNL_LINK_TX_CARRIER_ERR,	/*!< Carrier errors */
+	RTNL_LINK_TX_HBEAT_ERR,		/*!< Heartbeat errors */
+	RTNL_LINK_TX_WIN_ERR,		/*!< Window errors */
+	RTNL_LINK_COLLISIONS,		/*!< Send collisions */
+	RTNL_LINK_MULTICAST,		/*!< Multicast */
+	RTNL_LINK_IP6_INPKTS,		/*!< IPv6 SNMP InReceives */
+	RTNL_LINK_IP6_INHDRERRORS,	/*!< IPv6 SNMP InHdrErrors */
+	RTNL_LINK_IP6_INTOOBIGERRORS,	/*!< IPv6 SNMP InTooBigErrors */
+	RTNL_LINK_IP6_INNOROUTES,	/*!< IPv6 SNMP InNoRoutes */
+	RTNL_LINK_IP6_INADDRERRORS,	/*!< IPv6 SNMP InAddrErrors */
+	RTNL_LINK_IP6_INUNKNOWNPROTOS,	/*!< IPv6 SNMP InUnknownProtos */
+	RTNL_LINK_IP6_INTRUNCATEDPKTS,	/*!< IPv6 SNMP InTruncatedPkts */
+	RTNL_LINK_IP6_INDISCARDS,	/*!< IPv6 SNMP InDiscards */
+	RTNL_LINK_IP6_INDELIVERS,	/*!< IPv6 SNMP InDelivers */
+	RTNL_LINK_IP6_OUTFORWDATAGRAMS,	/*!< IPv6 SNMP OutForwDatagrams */
+	RTNL_LINK_IP6_OUTPKTS,		/*!< IPv6 SNMP OutRequests */
+	RTNL_LINK_IP6_OUTDISCARDS,	/*!< IPv6 SNMP OutDiscards */
+	RTNL_LINK_IP6_OUTNOROUTES,	/*!< IPv6 SNMP OutNoRoutes */
+	RTNL_LINK_IP6_REASMTIMEOUT,	/*!< IPv6 SNMP ReasmTimeout */
+	RTNL_LINK_IP6_REASMREQDS,	/*!< IPv6 SNMP ReasmReqds */
+	RTNL_LINK_IP6_REASMOKS,		/*!< IPv6 SNMP ReasmOKs */
+	RTNL_LINK_IP6_REASMFAILS,	/*!< IPv6 SNMP ReasmFails */
+	RTNL_LINK_IP6_FRAGOKS,		/*!< IPv6 SNMP FragOKs */
+	RTNL_LINK_IP6_FRAGFAILS,	/*!< IPv6 SNMP FragFails */
+	RTNL_LINK_IP6_FRAGCREATES,	/*!< IPv6 SNMP FragCreates */
+	RTNL_LINK_IP6_INMCASTPKTS,	/*!< IPv6 SNMP InMcastPkts */
+	RTNL_LINK_IP6_OUTMCASTPKTS,	/*!< IPv6 SNMP OutMcastPkts */
+	RTNL_LINK_IP6_INBCASTPKTS,	/*!< IPv6 SNMP InBcastPkts */
+	RTNL_LINK_IP6_OUTBCASTPKTS,	/*!< IPv6 SNMP OutBcastPkts */
+	RTNL_LINK_IP6_INOCTETS,		/*!< IPv6 SNMP InOctets */
+	RTNL_LINK_IP6_OUTOCTETS,	/*!< IPv6 SNMP OutOctets */
+	RTNL_LINK_IP6_INMCASTOCTETS,	/*!< IPv6 SNMP InMcastOctets */
+	RTNL_LINK_IP6_OUTMCASTOCTETS,	/*!< IPv6 SNMP OutMcastOctets */
+	RTNL_LINK_IP6_INBCASTOCTETS,	/*!< IPv6 SNMP InBcastOctets */
+	RTNL_LINK_IP6_OUTBCASTOCTETS,	/*!< IPv6 SNMP OutBcastOctets */
+	RTNL_LINK_ICMP6_INMSGS,		/*!< ICMPv6 SNMP InMsgs */
+	RTNL_LINK_ICMP6_INERRORS,	/*!< ICMPv6 SNMP InErrors */
+	RTNL_LINK_ICMP6_OUTMSGS,	/*!< ICMPv6 SNMP OutMsgs */
+	RTNL_LINK_ICMP6_OUTERRORS,	/*!< ICMPv6 SNMP OutErrors */
+	__RTNL_LINK_STATS_MAX,
+} rtnl_link_stat_id_t;
+
+#define RTNL_LINK_STATS_MAX (__RTNL_LINK_STATS_MAX - 1)
 
 typedef struct stats_info_t {
     char ifname[IFNAMSIZ];
