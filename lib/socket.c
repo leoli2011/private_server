@@ -598,7 +598,6 @@ acceptn(s, addr, addrlen)
       ;
 #endif /* SOCKS_CLIENT */
 
-   //slog(LOG_DEBUG, "###################333%s: fd=%d", function, rc);
 #if !SOCKS_CLIENT && HAVE_LINUX_BUGS
    if (rc != -1) {
       /*

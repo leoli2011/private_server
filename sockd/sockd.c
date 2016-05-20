@@ -1194,7 +1194,7 @@ case ENFILE:
             mstats->user_info.user_cnt += 1;
           }
 
-          slog(LOG_ALARM, "accept:################ j = %d, user_cnt =%d, uid=%x\n", j,  user_cnt, uuid);
+          slog(LOG_ALARM, "accept:######## user_cnt=%d, uid=%x,%d\n", user_cnt, uuid, uuid);
       }
 
       sockd_shmdt(&rule, SHMEM_MONITOR);

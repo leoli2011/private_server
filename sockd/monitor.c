@@ -41,14 +41,14 @@
  *
  */
 
-#include "netlink/netlink.h"
-//#include "netlink/route/link.h"
-
 #include "curl/curl.h"
 #include "json-c/json.h"
 #include "common.h"
 #include "monitor.h"
 #include "config_parse.h"
+#include "netlink/netlink.h"
+#include "netlink/route/link.h"
+
 static const char rcsid[] =
 "$Id: monitor.c,v 1.125.4.8 2014/08/24 11:41:34 karls Exp $";
 
@@ -1007,21 +1007,16 @@ disconnect_alarm_body(weclosedfirst, op, alarm, sides, cinfo, reason, lock, io)
                #define MPTCP_AUTH_UUID 29
                if (io) {
                     rc = getsockopt(io->src.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-                    slog(LOG_DEBUG, "alarm_connect ################333rc =%d %s, uid=%x\n", rc, strerror(errno), uuid);
+                    slog(LOG_DEBUG, "%s alarm_connect: rc=%d %s, uid=%x\n", __func__, rc, strerror(errno), uuid);
                }
    int i;
    if (uif) {
-   for (i = 0; i < 100; i++) {
-       if (uuid != 0 && uif->alarm[i].uid == uuid) {
-            slog(LOG_DEBUG, "alarm_connect########## uif=%p, uid=%x, alarm->uid=%x  ", uif, uuid, uif->alarm[i].uid);
-           break;
-       } else {
-           uif = NULL;
-       }
-   }
-   } else {
-       uif = NULL;
-
+      for (i = 0; i < uif->user_cnt; i++) {
+          if (uuid != 0 && uif->alarm[i].uid == uuid) {
+              slog(LOG_DEBUG, "alarm_connect########## uif=%p, uid=%x, alarm->uid=%x  ", uif, uuid, uif->alarm[i].uid);
+              break;
+          }
+      }
    }
 
    locktaken = 0;
@@ -1172,20 +1167,19 @@ int doreporter(CURL *handle, int type) {
 
     ret = curl_easy_perform(handle);
     if(ret != CURLE_OK) {
-        fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                curl_easy_strerror(ret));
+     	slog(LOG_ALARM, "curl_easy_perform() failed: %s\n", curl_easy_strerror(ret));
     } else {
-        printf("########%lu bytes retrieved\n", (long)chunk.size);
+        slog(LOG_ALARM, "########%lu bytes retrieved\n", (long)chunk.size);
         FILE * file;
 
         file = fopen("/tmp/iplist", "w");
         if (file == NULL) {
-            slog(LOG_DEBUG, "Failed to open /tmp/iplist");
+            slog(LOG_ALARM, "Failed to open /tmp/iplist");
             return -1;
         }
 
         if (fwrite(chunk.memory, 1, chunk.size, file) != chunk.size) {
-            slog(LOG_DEBUG, "Failed to wirte /tmp/iplist");
+            slog(LOG_ALARM, "Failed to wirte /tmp/iplist");
             fclose(file);
             return -1;
         }
@@ -1194,19 +1188,20 @@ int doreporter(CURL *handle, int type) {
         json_object *json_result = json_tokener_parse(chunk.memory);
         json_object *status, *ver, *msg;
         if (json_result == NULL) {
-            fprintf(stderr, "Failed to get json result\n");
+            slog(LOG_ALARM, "Failed to get json result\n");
             return 0;
         }
 
         if (!json_object_object_get_ex(json_result, "status", &status)
             || json_object_get_type(status) != json_type_int) {
-            fprintf(stderr, "Failed to get status\n");
+            slog(LOG_ALARM, "Failed to get status\n");
             return 0;
         }
 
         json_object_object_get_ex(json_result, "msg", &msg);
         json_object_object_get_ex(json_result, "ver", &ver);
-        printf("status: (%d),ip_version=%d, msg = %s \n",
+
+        slog(LOG_ALARM, "status: (%d),ip_version=%d, msg = %s \n",
                 json_object_get_int(status),
                 json_object_get_int(ver),
                 json_object_get_string(msg));
@@ -1455,18 +1450,6 @@ checkmonitors(void)
         url = IP_PORT"/v1/iplist";
         curl_easy_setopt(easy_handle, CURLOPT_URL, url);
         doreporter(easy_handle, 0);
-
-
-        /*
-	    if (strstr(url, "user_info")) {
-		    doupdate(easy_handle, ST_USERINFO, monitor);
-        }
-    	else if (strstr(url, "cardinfo")) {
-    		doupdate(easy_handle, ST_CARDINFO, monitor);
-        }
-    	else
-	         slog(LOG_DEBUG, "Unsupport operation!\n");
-        */
 
 	    curl_easy_cleanup(easy_handle);
 	    curl_global_cleanup();
@@ -2038,25 +2021,25 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
 	json_object *uid, *key;
 	json_object *msg, *machine_id;
 
-	fprintf(stdout, "%s\n", (char*) buffer);
+    slog(LOG_ALARM, "%s\n", (char*) buffer);
 
 	json_result = json_tokener_parse(buffer);
 	if (json_result == NULL) {
-		fprintf(stderr, "Failed to get json result\n");
+        slog(LOG_ALARM, "Failed to get json result\n");
 		return 0;
 	}
 
 	if (!json_object_object_get_ex(json_result, "status", &status)
 			|| json_object_get_type(status) != json_type_int) {
 
-		fprintf(stderr, "Failed to get status\n");
+        slog(LOG_ALARM, "Failed to get status\n");
 		goto exit;
 	}
 
 	json_object_object_get_ex(json_result, "msg", &msg);
-    printf("status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
+    slog(LOG_ALARM, "status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
     if (json_object_get_int(status) != 200) {
-        printf("status error: %d\n", json_object_get_int(status));
+        slog(LOG_ALARM, "status error: %d\n", json_object_get_int(status));
     }
 
 exit:
@@ -2089,25 +2072,14 @@ int get_cardinfo(char* ifname, uint64_t *tx, uint64_t *rx)
         return err;
     }
 
-    link = rtnl_link_get_by_name(link_cache, ifname);
+    link = (struct rtnl_link *)rtnl_link_get_by_name(link_cache, ifname);
 
     if (!link)
         goto exit;
 
-//	if ((*rx = rtnl_link_get_stat(link, RTNL_LINK_RX_BYTES)) < 0) {
-	if ((*rx = rtnl_link_get_stat(link, 2)) < 0) {
-		nl_perror(err, "Unable to delete link");
-		return err;
-	}
-
-	//if ((*tx = rtnl_link_get_stat(link, RTNL_LINK_TX_BYTES)) < 0) {
-	if ((*tx = rtnl_link_get_stat(link, 3)) < 0) {
-		nl_perror(err, "Unable to delete link");
-		return err;
-	}
-
-    //printf("%s.%s %llu %llu \n", rtnl_link_get_name(link),
-    //      rtnl_link_stat2str(RTNL_LINK_RX_BYTES, buf, sizeof(buf)), *rx, *tx);
+    *rx = rtnl_link_get_stat(link, RTNL_LINK_RX_BYTES);
+	*tx = rtnl_link_get_stat(link, RTNL_LINK_TX_BYTES);
+    //slog(LOG_ALARM, "%s rx=%lu tx=%lu \n", (char *)rtnl_link_get_name(link), *rx, *tx);
 
 	rtnl_link_put(link);
 
@@ -2131,7 +2103,7 @@ int getipaddr(char *ifname, struct in_addr *addr)
     return 0;
 }
 
-stats_info g_stat[5];
+static stats_info g_stat[5];
 static int doupdate(CURL *handle, int type, monitor_t *monitor)
 {
 	char buf[1024];
@@ -2144,7 +2116,6 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
     for (i = 0; i < sockscf.external.addrc; i++) {
         snprintf(g_stat[i].ifname, 20, "%s", sockscf.external.addrv[i].addr.ifname);
         get_cardinfo(g_stat[i].ifname, &g_stat[i].last_tx, &g_stat[i].last_rx);
-     //	slog(LOG_DEBUG, "buf: end name = %s\n", sockscf.external.addrv[i].addr.ifname);
         getipaddr(g_stat[i].ifname, &g_stat[i].addr);
     }
 
@@ -2154,7 +2125,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                 json_object *conn_update = json_object_new_object();
                 json_object *user_list = json_object_new_array();
                 json_object *dip = json_object_new_array();
-     	   	    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d, %x\n", uif->user_cnt, uif->alarm[0].uid);
+     	   	    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
 
                 for (i = 0; i < uif->user_cnt; i++) {
                     json_object *user_info = json_object_new_object();
@@ -2179,15 +2150,18 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
  	       break;
 		case ST_CARDINFO: {
                   int i = 0;
+                  int64_t dif_tx = 0;
+                  int64_t dif_rx = 0;
                   json_object *netcard_update = json_object_new_object();
                   json_object *card_list = json_object_new_array();
                   for (i = 0; i < sockscf.external.addrc; i++) {
-     	   	            slog(LOG_ALARM, "last_tx=%lu, tx=%lu,sub=%lu last_rx=%lu, rx=%lu, sub=%lu\n",
-                                g_stat[i].last_tx, g_stat[i].tx, g_stat[i].last_tx - g_stat[i].tx,
-                                g_stat[i].last_rx, g_stat[i].rx, g_stat[i].last_rx - g_stat[i].rx);
+                        dif_tx = g_stat[i].last_tx - g_stat[i].tx;
+                        dif_rx = g_stat[i].last_rx - g_stat[i].rx;
+     	   	            //slog(LOG_ALARM, "last_tx=%lu, tx=%lu, dif=%lu, last_rx=%lu, rx=%lu, dif=%lu\n",
+                        //       g_stat[i].last_tx, g_stat[i].tx, dif_tx,
+                        //      g_stat[i].last_rx, g_stat[i].rx, dif_rx);
                         json_object *card = json_object_new_object();
-                        json_object_object_add(card, "ip",
-                                         json_object_new_string(inet_ntoa(g_stat[i].addr)));
+                        json_object_object_add(card, "ip", json_object_new_string(inet_ntoa(g_stat[i].addr)));
                         if (g_stat[i].tx == 0 && g_stat[i].rx == 0) {
                             json_object_object_add(card, "uploads", json_object_new_int64(0));
                             json_object_object_add(card, "downloads", json_object_new_int64(0));
@@ -2195,6 +2169,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                             json_object_object_add(card, "uploads", json_object_new_int64(g_stat[i].last_tx - g_stat[i].tx));
                             json_object_object_add(card, "downloads", json_object_new_int64(g_stat[i].last_rx - g_stat[i].rx));
                         }
+
                         json_object_array_add(card_list, card);
                         g_stat[i].tx = g_stat[i].last_tx;
                         g_stat[i].rx = g_stat[i].last_rx;

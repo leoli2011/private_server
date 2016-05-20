@@ -1347,6 +1347,7 @@ typedef struct {
    } alarm;
 } monitor_if_t;
 
+#define SOCKD_MAX_CLIENTS           (10000)
 typedef struct {
    struct {
       uint32_t     uid;
@@ -1354,7 +1355,7 @@ typedef struct {
       uint32_t     uploads;
       uint32_t     downloads;
       uint32_t     dip[10];
-   } alarm[100];
+   } alarm[SOCKD_MAX_CLIENTS];
    uint32_t user_cnt;
 } user_info_t;
 

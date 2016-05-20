@@ -3500,30 +3500,21 @@ io_update(timenow, bwused, i_read, i_written,
    SASSERTX(packetrule->mstats != NULL);
    monitor = &packetrule->mstats->object.monitor;
 
-//   user_info_t *uif = NULL;
-//   int i;
-   user_info_t *uif = &packetrule->mstats->object.monitor.user_info;
-               int uuid=0;
-               int rc = -1;
-               int aa=sizeof(int);
-               #define MPTCP_AUTH_UUID 29
-               rc = getsockopt(uid, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-               slog(LOG_DEBUG, "################333rc =%d %s, uid=%x\n", rc, strerror(errno), uuid);
+   #define MPTCP_AUTH_UUID 29
    int i;
+   user_info_t *uif = &packetrule->mstats->object.monitor.user_info;
    if (uif) {
-   for (i = 0; i < 100; i++) {
-       if (uuid != 0 && uif->alarm[i].uid == uuid) {
-            slog(LOG_DEBUG, "########## uif=%p, uid=%x, alarm->uid=%x  ", uif, uuid, uif->alarm[i].uid);
-           break;
-       } else {
-           uif = NULL;
-           break;
-       }
-   }
-
-   } else {
-       uif = NULL;
-
+      int uuid = 0;
+      int rc = -1;
+      int aa = sizeof(int);
+      rc = getsockopt(uid, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
+      //slog(LOG_ALARM, "%s ################333rc=%d uuid=%d, socket =%d uif=%p\n", __func__, rc, uuid, uid,uif);
+      for (i = 0; i < uif->user_cnt; i++) {
+          if (uuid != 0 && uif->alarm[i].uid == uuid) {
+              //slog(LOG_ALARM, "########## uif=%p, uid=%d, alarm->uid=%d, i=%d  ", uif, uuid, uif->alarm[i].uid, i);
+              break;
+          }
+      }
    }
 
    socks_lock(sockscf.shmemfd, (off_t)packetrule->mstats_shmid, 1, 1, 1);
@@ -3545,6 +3536,9 @@ io_update(timenow, bwused, i_read, i_written,
    }
 
    uif ? uif->alarm[i].uploads += e_written->bytes : 0;
+//   if (uif) {
+//       slog(LOG_ALARM, "########## i=%d uid=%d, uploads=%d", i, uif->alarm[i].uid, uif->alarm[i].uploads);
+//   }
    if (monitor->external.alarm.data.recv.isconfigured
    && e_read != NULL
    && memcmp(&zero, e_read, sizeof(zero)) != 0) {

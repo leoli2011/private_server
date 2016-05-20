@@ -6,4 +6,5 @@ redsocks
 *.Plo
 *.Po
 *.deps/*
+*.out
 

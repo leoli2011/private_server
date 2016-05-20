@@ -9,7 +9,8 @@ directory .
 #break 370
 
 
-#set detach-on-fork off
+set follow-fork-mode parent
+set detach-on-fork off
 #set target-async on
-#set pagination off
-#set non-stop on
+set pagination off
+set non-stop on

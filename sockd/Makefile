@@ -159,7 +159,7 @@ AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 #CFLAGS =  -O2 -ggdb -pipe 
-CFLAGS =  -O0 -g -ggdb -pipe 
+CFLAGS =   -O0 -g -ggdb -pipe 
 CPP = gcc -E
 CPPFLAGS = -D_XOPEN_SOURCE=600 -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -DDEBUG=0 -D_FORTIFY_SOURCE=2 -I/usr/include
 CYGPATH_W = echo
