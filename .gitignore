@@ -8,4 +8,5 @@ redsocks
 *.deps/*
 *.log
 core.*
+*.out
 
