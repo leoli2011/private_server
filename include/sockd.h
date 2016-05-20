@@ -1352,8 +1352,8 @@ typedef struct {
    struct {
       uint32_t     uid;
       uint32_t     sess_cnt;
-      uint32_t     uploads;
-      uint32_t     downloads;
+      uint64_t     uploads;
+      uint64_t     downloads;
       uint32_t     dip[10];
    } alarm[SOCKD_MAX_CLIENTS];
    uint32_t user_cnt;
