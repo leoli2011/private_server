@@ -147,7 +147,7 @@ alarmcheck_disconnect(const monitor_t *monitor, alarm_disconnect_t *alarm,
 #define OP_DISCONNECT      (2)
 #define OP_REMOVE_SESSION  (4)
 
-#define IP_PORT "http://10.118.30.166:443"
+#define IP_PORT "http://10.118.30.192:443"
 
 static char *op2string(const size_t op);
 
@@ -2194,8 +2194,8 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                     json_object *user_info = json_object_new_object();
                     json_object_object_add(user_info, "uid", json_object_new_int(uif->alarm[i].uid));
                     json_object_object_add(user_info, "connect_count", json_object_new_int(uif->alarm[i].sess_cnt));
-                    json_object_object_add(user_info, "uploads",  json_object_new_int(uif->alarm[i].uploads));
-                    json_object_object_add(user_info, "downloads", json_object_new_int(uif->alarm[i].downloads));
+                    json_object_object_add(user_info, "uploads",  json_object_new_int64(uif->alarm[i].uploads));
+                    json_object_object_add(user_info, "downloads", json_object_new_int64(uif->alarm[i].downloads));
                     for (j = 0; j < 10 && uif->alarm[i].dip[j]; j++) {
                         json_object_array_add(dip, json_object_new_int(uif->alarm[i].dip[j]));
                     }
