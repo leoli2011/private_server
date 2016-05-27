@@ -1160,7 +1160,6 @@ case ENFILE:
                int uuid=0;
                int rc = -1;
                int aa=sizeof(int);
-               #define MPTCP_AUTH_UUID 29
                rc = getsockopt(client.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
                slog(LOG_ALARM, "########accepted tcp client %s on address %s, fd=%d, uuid=%x, rc=%d\n",
                     sockaddr2string(&client.from, astr, sizeof(astr)),
