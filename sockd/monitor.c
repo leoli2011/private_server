@@ -147,7 +147,7 @@ alarmcheck_disconnect(const monitor_t *monitor, alarm_disconnect_t *alarm,
 #define OP_DISCONNECT      (2)
 #define OP_REMOVE_SESSION  (4)
 
-#define IP_PORT "http://10.118.30.192:443"
+#define IP_PORT "http://10.118.30.166:443"
 
 static char *op2string(const size_t op);
 
@@ -1201,7 +1201,7 @@ WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
 
   mem->memory = realloc(mem->memory, mem->size + realsize + 1);
   if(mem->memory == NULL) {
-    printf("not enough memory (realloc returned NULL)\n");
+    slog(LOG_ALARM, "not enough memory (realloc returned NULL)\n");
     return 0;
   }
 
