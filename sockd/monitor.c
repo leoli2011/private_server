@@ -1061,22 +1061,22 @@ disconnect_alarm_body(weclosedfirst, op, alarm, sides, cinfo, reason, lock, io)
    shmem_object_t _shmem = *alarm->mstats;
 #endif /* DEBUG */
 
-   //int i;
-   //user_info_t *uif=NULL;
    user_info_t *uif = &alarm->mstats->object.monitor.user_info;
-               int uuid=0;
-               int rc = -1;
-               int aa=sizeof(int);
-               #define MPTCP_AUTH_UUID 29
-               if (io) {
-                    rc = getsockopt(io->src.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-                    slog(LOG_DEBUG, "%s alarm_connect: rc=%d %s, uid=%x\n", __func__, rc, strerror(errno), uuid);
-               }
    int i;
+   int rc = -1;
+   int uuid = 0;
+   int len = sizeof(int);
+
+   if (io) {
+      rc = getsockopt(io->src.s, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &len);
+      slog(LOG_ALARM, "%s alarm_connect: rc=%d %s, uid=%x\n", __func__, rc, strerror(errno), uuid);
+   }
+
    if (uif) {
       for (i = 0; i < uif->user_cnt; i++) {
           if (uuid != 0 && uif->alarm[i].uid == uuid) {
-              slog(LOG_DEBUG, "alarm_connect########## uif=%p, uid=%x, alarm->uid=%x  ", uif, uuid, uif->alarm[i].uid);
+              slog(LOG_ALARM, "alarm_connect########## uif=%p, uid=%x, alarm->uid=%x , i=%d, user_cnt=%d ",
+                      uif, uuid, uif->alarm[i].uid, i, uif->user_cnt);
               break;
           }
       }
@@ -1133,7 +1133,7 @@ disconnect_alarm_body(weclosedfirst, op, alarm, sides, cinfo, reason, lock, io)
                SASSERTX(reason == NULL);
 
                disconnect->sessionc += 1;
-               if (uif) {
+               if (uif && io) {
                     int j;
                     uif->alarm[i].sess_cnt +=1;
                     for (j = 0; j < 10; j++) {
@@ -1141,11 +1141,11 @@ disconnect_alarm_body(weclosedfirst, op, alarm, sides, cinfo, reason, lock, io)
                             break;
                         }
                     }
-                    if (j == 9) {
-                        uif->alarm[i].dip[0] = TOIN(&io->dst.raddr)->sin_addr.s_addr;
-                    } else {
-                        uif->alarm[i].dip[j] = TOIN(&io->dst.raddr)->sin_addr.s_addr;
-                    }
+
+                    uif->alarm[i].dip[j%10] = TOIN(&io->dst.raddr)->sin_addr.s_addr;
+                    //struct in_addr test;
+                    //test.s_addr = uif->alarm[i].dip[j];
+     	            //slog(LOG_ALARM, "#### add dip j=%d ip=%s\n", j, inet_ntoa(test));
                }
                break;
 

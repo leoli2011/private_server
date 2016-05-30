@@ -63,6 +63,7 @@
 
 #include <regex.h>
 
+#define MPTCP_AUTH_UUID 29
 /*
  * Throttling for objects we send to the monitor process for testing.
  * Each process can send objects to the monitor at the rate of one

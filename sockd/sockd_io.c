@@ -3500,7 +3500,6 @@ io_update(timenow, bwused, i_read, i_written,
    SASSERTX(packetrule->mstats != NULL);
    monitor = &packetrule->mstats->object.monitor;
 
-   #define MPTCP_AUTH_UUID 29
    int i;
    user_info_t *uif = &packetrule->mstats->object.monitor.user_info;
    if (uif) {
