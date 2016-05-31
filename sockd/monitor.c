@@ -147,7 +147,7 @@ alarmcheck_disconnect(const monitor_t *monitor, alarm_disconnect_t *alarm,
 #define OP_DISCONNECT      (2)
 #define OP_REMOVE_SESSION  (4)
 
-#define IP_PORT "http://10.118.30.166:443"
+#define IP_PORT "http://127.0.0.1:443"
 
 static char *op2string(const size_t op);
 
@@ -229,7 +229,7 @@ static void proctitleupdate(void);
  * we are monitoring.
  */
 
-static int doupdate(CURL *handle, int type, monitor_t *monitor);
+static int doupdate(char *url, int type, monitor_t *monitor);
 
 static struct {
    size_t         alarmsactive;    /* number of alarms currently active.      */
@@ -509,6 +509,8 @@ run_monitor(void)
 
    sockd_print_child_ready_message((size_t)freedescriptors(NULL, NULL));
 
+   doreporter();
+
    while (1) {
       struct timeval timeout;
       int fdbits;
@@ -526,7 +528,6 @@ run_monitor(void)
       fdbits = MAX(fdbits, sockscf.state.mother.ack);
 
       ++fdbits;
-//      struct timeval ttout = {10, 0};
       switch (selectn(fdbits,
                       rset,
                       NULL,
@@ -1213,15 +1214,40 @@ WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
 
 struct MemoryStruct chunk;
 int g_ip_ver = 0;
-int doreporter(CURL *handle, int type) {
+
+int doreporter(void)
+{
+    char *url;
+    CURLcode return_code;
+    CURL *handle;
     int ret = -1;
     const char *post_str;
+    FILE *file;
+    json_object *ip_update;
+    json_object *status, *ver, *msg;
+    json_object *json_result = NULL;
 
-    json_object *ip_update = json_object_new_object();
+
+    return_code = curl_global_init(CURL_GLOBAL_ALL);
+    if (CURLE_OK != return_code) {
+        slog(LOG_DEBUG, "init libcurl failed.\n");
+        return;
+    }
+
+    handle = curl_easy_init();
+    if (!handle) {
+        slog(LOG_DEBUG, "get a curl handle failed.\n");
+        curl_global_cleanup();
+        return;
+    }
+
+    url = IP_PORT"/v1/iplist";
+    curl_easy_setopt(handle, CURLOPT_URL, url);
+
+    ip_update = json_object_new_object();
     json_object_object_add(ip_update, "ver", json_object_new_int(g_ip_ver));
 
     post_str = json_object_to_json_string(ip_update);
-
     curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);
     curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, &WriteMemoryCallback);
     curl_easy_setopt(handle, CURLOPT_WRITEDATA, (void *)&chunk);
@@ -1232,32 +1258,29 @@ int doreporter(CURL *handle, int type) {
      	slog(LOG_ALARM, "curl_easy_perform() failed: %s\n", curl_easy_strerror(ret));
     } else {
         slog(LOG_ALARM, "########%lu bytes retrieved\n", (long)chunk.size);
-        FILE * file;
-
-        file = fopen("/tmp/iplist", "w");
-        if (file == NULL) {
+        file = fopen("/tmp/iplist", "w+");
+        if (!file) {
             slog(LOG_ALARM, "Failed to open /tmp/iplist");
-            return -1;
+            goto exit;
         }
 
         if (fwrite(chunk.memory, 1, chunk.size, file) != chunk.size) {
             slog(LOG_ALARM, "Failed to wirte /tmp/iplist");
             fclose(file);
-            return -1;
+            goto exit;
         }
         fclose(file);
 
-        json_object *json_result = json_tokener_parse(chunk.memory);
-        json_object *status, *ver, *msg;
+        json_result = json_tokener_parse(chunk.memory);
         if (json_result == NULL) {
             slog(LOG_ALARM, "Failed to get json result\n");
-            return 0;
+            goto exit;
         }
 
         if (!json_object_object_get_ex(json_result, "status", &status)
             || json_object_get_type(status) != json_type_int) {
             slog(LOG_ALARM, "Failed to get status\n");
-            return 0;
+            goto exit;
         }
 
         json_object_object_get_ex(json_result, "msg", &msg);
@@ -1268,18 +1291,23 @@ int doreporter(CURL *handle, int type) {
                 json_object_get_int(ver),
                 json_object_get_string(msg));
 
-        if (json_object_get_int(status) != 200)
-            return -1;
+        if (json_object_get_int(status) != 200) {
+            goto exit;
+        }
 
         g_ip_ver = json_object_get_int(ver);
+    }
 
-        if (chunk.memory) {
-            free(chunk.memory);
-            chunk.memory = NULL;
-        }
+exit:
 
-        }
+    if (chunk.memory) {
+        free(chunk.memory);
+    }
 
+    json_object_put(json_result);
+    json_object_put(ip_update);
+    curl_easy_cleanup(handle);
+    curl_global_cleanup();
 
     return ret;
 }
@@ -1486,35 +1514,12 @@ checkmonitors(void)
             }
          }
 
-	     CURLcode return_code;
-         return_code = curl_global_init(CURL_GLOBAL_ALL);
-         if (CURLE_OK != return_code) {
-             slog(LOG_DEBUG, "init libcurl failed.\n");
-             return;
-         }
-
-	     CURL *easy_handle = curl_easy_init();
-         if (NULL == easy_handle) {
-	         slog(LOG_DEBUG, "get a easy handle failed.\n");
-	         curl_global_cleanup();
-        	 return;
-         }
-
 
         char *url = IP_PORT"/v1/state/userinfo";
-        curl_easy_setopt(easy_handle, CURLOPT_URL, url);
-		doupdate(easy_handle, ST_USERINFO, monitor);
+		doupdate(url, ST_USERINFO, monitor);
 
         url = IP_PORT"/v1/state/cardinfo";
-        curl_easy_setopt(easy_handle, CURLOPT_URL, url);
-        doupdate(easy_handle, ST_CARDINFO, monitor);
-
-        //url = IP_PORT"/v1/iplist";
-        //curl_easy_setopt(easy_handle, CURLOPT_URL, url);
-        //doreporter(easy_handle, 0);
-
-	    curl_easy_cleanup(easy_handle);
-	    curl_global_cleanup();
+        doupdate(url, ST_CARDINFO, monitor);
     }
 
 #define RESET_DISCONNECT(_alarm, _tnow)                                        \
@@ -2128,7 +2133,7 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
     slog(LOG_ALARM, "status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
 
 	json_object_object_get_ex(json_result, "logout_list", &logout);
-	if (!logout) 
+	if (!logout)
 		goto exit;
 
     for(i = 0; i < json_object_array_length(logout); i++) {
@@ -2201,49 +2206,63 @@ int getipaddr(char *ifname, struct in_addr *addr)
 }
 
 static stats_info g_stat[5];
-static int doupdate(CURL *handle, int type, monitor_t *monitor)
+static int doupdate(char *url, int type, monitor_t *monitor)
 {
-    const char *post_str;
     int i;
+    const char *post_str;
+    CURLcode return_code;
+    json_object *conn_update = NULL;
+    json_object *netcard_update = NULL;
     size_t conn_cnt = monitor->mstats->mstate.clients;
     user_info_t *uif = &monitor->mstats->object.monitor.user_info;
-    struct ifreq ifr;
-    json_object *conn_update = NULL;
-    json_object *netcard_update = NULL; 
+
+    return_code = curl_global_init(CURL_GLOBAL_ALL);
+    if (CURLE_OK != return_code) {
+        slog(LOG_DEBUG, "init libcurl failed.\n");
+        return;
+    }
+
+    CURL *handle = curl_easy_init();
+    if (!handle) {
+        slog(LOG_DEBUG, "get a easy handle failed.\n");
+        curl_global_cleanup();
+        return;
+    }
+
     for (i = 0; i < sockscf.external.addrc; i++) {
-        snprintf(g_stat[i].ifname, 20, "%s", sockscf.external.addrv[i].addr.ifname);
+        snprintf(g_stat[i].ifname, IFNAMSIZ, "%s", sockscf.external.addrv[i].addr.ifname);
         get_cardinfo(g_stat[i].ifname, &g_stat[i].last_tx, &g_stat[i].last_rx);
         getipaddr(g_stat[i].ifname, &g_stat[i].addr);
     }
 
 	switch (type) {
 		case ST_USERINFO: {
-                int j;
-                conn_update = json_object_new_object();
-                json_object *user_list = json_object_new_array();
-                json_object *dip = json_object_new_array();
-     	   	    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
+                    int j;
+                    conn_update = json_object_new_object();
+                    json_object *user_list = json_object_new_array();
+                    json_object *dip = json_object_new_array();
+     	   	        slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
 
-                for (i = 0; i < uif->user_cnt; i++) {
-                    json_object *user_info = json_object_new_object();
-                    json_object_object_add(user_info, "uid", json_object_new_int(uif->alarm[i].uid));
-                    json_object_object_add(user_info, "connect_count", json_object_new_int(uif->alarm[i].sess_cnt));
-                    json_object_object_add(user_info, "uploads",  json_object_new_int64(uif->alarm[i].uploads));
-                    json_object_object_add(user_info, "downloads", json_object_new_int64(uif->alarm[i].downloads));
-                    for (j = 0; j < 10 && uif->alarm[i].dip[j]; j++) {
-                        json_object_array_add(dip, json_object_new_int(uif->alarm[i].dip[j]));
+                    for (i = 0; i < uif->user_cnt; i++) {
+                        json_object *user_info = json_object_new_object();
+                        json_object_object_add(user_info, "uid", json_object_new_int(uif->alarm[i].uid));
+                        json_object_object_add(user_info, "connect_count", json_object_new_int(uif->alarm[i].sess_cnt));
+                        json_object_object_add(user_info, "uploads",  json_object_new_int64(uif->alarm[i].uploads));
+                        json_object_object_add(user_info, "downloads", json_object_new_int64(uif->alarm[i].downloads));
+                        for (j = 0; j < 10 && uif->alarm[i].dip[j]; j++) {
+                            json_object_array_add(dip, json_object_new_int(uif->alarm[i].dip[j]));
+                        }
+                        json_object_object_add(user_info, "dest_ip", dip);
+                        json_object_array_add(user_list, user_info);
                     }
-                    json_object_object_add(user_info, "dest_ip", dip);
-                    json_object_array_add(user_list, user_info);
-                }
 
-                json_object_object_add(conn_update, "user_list", user_list);
-     	   	    post_str = json_object_to_json_string(conn_update);
-     	   	    slog(LOG_ALARM, "post_buf: %s\n", post_str);
+                    json_object_object_add(conn_update, "user_list", user_list);
+     	   	        post_str = json_object_to_json_string(conn_update);
+     	   	        slog(LOG_ALARM, "post_buf: %s\n", post_str);
 
-				}
-
+			 }
  	       break;
+
 		case ST_CARDINFO: {
                   int64_t dif_tx = 0;
                   int64_t dif_rx = 0;
@@ -2282,10 +2301,11 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
      	  slog(LOG_ALARM, "unknown type = %d\n", type);
 	}
 
+    curl_easy_setopt(handle, CURLOPT_URL, url);
  	curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);
  	curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, &process_data);
  	curl_easy_setopt(handle, CURLOPT_WRITEDATA, monitor);
- 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+ 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 0L);
  	curl_easy_perform(handle);
 
     if (type == ST_USERINFO) {
@@ -2294,6 +2314,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
         json_object_put(netcard_update);
     }
 
+	curl_easy_cleanup(handle);
+	curl_global_cleanup();
 	return 0;
 }
-
