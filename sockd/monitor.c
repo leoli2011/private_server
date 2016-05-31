@@ -2083,7 +2083,7 @@ static int del_uid(monitor_t *monitor, uint32_t uid)
     int i, j;
     for (i = 0; i < uif->user_cnt; i++) {
         if (uid == uif->alarm[i].uid) {
-     	   	slog(LOG_ALARM, "alarm found it, user_cnt=%d, i=%d the uid=%x invalid\n", uif->user_cnt, i, uif->alarm[i].uid);
+     	   	slog(LOG_ALARM, "found it, user_cnt=%d, i=%d the uid=%x invalided, delete it\n", uif->user_cnt, i, uif->alarm[i].uid);
             break;
         }
     }
@@ -2093,7 +2093,6 @@ static int del_uid(monitor_t *monitor, uint32_t uid)
     }
 
     uif->user_cnt--;
-    slog(LOG_ALARM, "alarm found it, user_cnt=%d, i=%d \n", uif->user_cnt, i);
 
 	return 0;
 }
@@ -2129,6 +2128,9 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
     slog(LOG_ALARM, "status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
 
 	json_object_object_get_ex(json_result, "logout_list", &logout);
+	if (!logout) 
+		goto exit;
+
     for(i = 0; i < json_object_array_length(logout); i++) {
         json_object *jid = json_object_array_get_idx(logout, i);
         uint32_t uid = json_object_get_int(jid);
