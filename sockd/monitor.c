@@ -526,15 +526,14 @@ run_monitor(void)
       fdbits = MAX(fdbits, sockscf.state.mother.ack);
 
       ++fdbits;
-      struct timeval ttout = {10, 0};
+//      struct timeval ttout = {10, 0};
       switch (selectn(fdbits,
                       rset,
                       NULL,
                       NULL,
                       NULL,
                       NULL,
-                      &ttout)){
-                      //gettimeout(&timeout))) {
+                      gettimeout(&timeout))) {
          case -1:
             if (errno == EINTR)
                continue;
@@ -1510,9 +1509,9 @@ checkmonitors(void)
         curl_easy_setopt(easy_handle, CURLOPT_URL, url);
         doupdate(easy_handle, ST_CARDINFO, monitor);
 
-        url = IP_PORT"/v1/iplist";
-        curl_easy_setopt(easy_handle, CURLOPT_URL, url);
-        doreporter(easy_handle, 0);
+        //url = IP_PORT"/v1/iplist";
+        //curl_easy_setopt(easy_handle, CURLOPT_URL, url);
+        //doreporter(easy_handle, 0);
 
 	    curl_easy_cleanup(easy_handle);
 	    curl_global_cleanup();
@@ -2078,14 +2077,37 @@ do {                                                                           \
            iface->alarm.disconnect.limit.seconds == 1 ? "" : "s");
 }
 
+static int del_uid(monitor_t *monitor, uint32_t uid)
+{
+    user_info_t *uif = &monitor->mstats->object.monitor.user_info;
+    int i, j;
+    for (i = 0; i < uif->user_cnt; i++) {
+        if (uid == uif->alarm[i].uid) {
+     	   	slog(LOG_ALARM, "alarm found it, user_cnt=%d, i=%d the uid=%x invalid\n", uif->user_cnt, i, uif->alarm[i].uid);
+            break;
+        }
+    }
+
+    for (j = i; j < uif->user_cnt-1; j++) {
+        memcpy(&uif->alarm[j], &uif->alarm[j+1], sizeof(uif->alarm[0]));
+    }
+
+    uif->user_cnt--;
+    slog(LOG_ALARM, "alarm found it, user_cnt=%d, i=%d \n", uif->user_cnt, i);
+
+	return 0;
+}
+
 static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p) {
 	json_object *json_result;
-	json_object *data, *status;
-	json_object *uid, *key;
-	json_object *msg, *machine_id;
+	json_object *status;
+	json_object *msg;
+    json_object *logout;
+    int i;
 
     slog(LOG_ALARM, "%s\n", (char*) buffer);
 
+    monitor_t *monitor = (monitor_t *)user_p;
 	json_result = json_tokener_parse(buffer);
 	if (json_result == NULL) {
         slog(LOG_ALARM, "Failed to get json result\n");
@@ -2093,17 +2115,27 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
 	}
 
 	if (!json_object_object_get_ex(json_result, "status", &status)
-			|| json_object_get_type(status) != json_type_int) {
-
+		|| json_object_get_type(status) != json_type_int) {
         slog(LOG_ALARM, "Failed to get status\n");
 		goto exit;
 	}
 
-	json_object_object_get_ex(json_result, "msg", &msg);
-    slog(LOG_ALARM, "status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
     if (json_object_get_int(status) != 200) {
         slog(LOG_ALARM, "status error: %d\n", json_object_get_int(status));
+        goto exit;
     }
+
+	json_object_object_get_ex(json_result, "msg", &msg);
+    slog(LOG_ALARM, "status: (%d), msg = %s \n", json_object_get_int(status), json_object_get_string(msg));
+
+	json_object_object_get_ex(json_result, "logout_list", &logout);
+    for(i = 0; i < json_object_array_length(logout); i++) {
+        json_object *jid = json_object_array_get_idx(logout, i);
+        uint32_t uid = json_object_get_int(jid);
+        slog(LOG_ALARM, "jid[%d]=%x tostring = %s \n", i, uid, json_object_to_json_string(jid));
+        del_uid(monitor, uid);
+    }
+
 
 exit:
     json_object_put(json_result);
@@ -2140,9 +2172,9 @@ int get_cardinfo(char* ifname, uint64_t *tx, uint64_t *rx)
     if (!link)
         goto exit;
 
-        *rx = rtnl_link_get_stat(link, RTNL_LINK_RX_BYTES);
+    *rx = rtnl_link_get_stat(link, RTNL_LINK_RX_BYTES);
 	*tx = rtnl_link_get_stat(link, RTNL_LINK_TX_BYTES);
-    	//slog(LOG_ALARM, "%s rx=%lu tx=%lu \n", (char *)rtnl_link_get_name(link), *rx, *tx);
+    //slog(LOG_ALARM, "%s rx=%lu tx=%lu \n", (char *)rtnl_link_get_name(link), *rx, *tx);
 
 	rtnl_link_put(link);
 
@@ -2169,13 +2201,13 @@ int getipaddr(char *ifname, struct in_addr *addr)
 static stats_info g_stat[5];
 static int doupdate(CURL *handle, int type, monitor_t *monitor)
 {
-	char buf[1024];
     const char *post_str;
     int i;
     size_t conn_cnt = monitor->mstats->mstate.clients;
     user_info_t *uif = &monitor->mstats->object.monitor.user_info;
     struct ifreq ifr;
-
+    json_object *conn_update = NULL;
+    json_object *netcard_update = NULL; 
     for (i = 0; i < sockscf.external.addrc; i++) {
         snprintf(g_stat[i].ifname, 20, "%s", sockscf.external.addrv[i].addr.ifname);
         get_cardinfo(g_stat[i].ifname, &g_stat[i].last_tx, &g_stat[i].last_rx);
@@ -2185,7 +2217,7 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
 	switch (type) {
 		case ST_USERINFO: {
                 int j;
-                json_object *conn_update = json_object_new_object();
+                conn_update = json_object_new_object();
                 json_object *user_list = json_object_new_array();
                 json_object *dip = json_object_new_array();
      	   	    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
@@ -2204,18 +2236,16 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                 }
 
                 json_object_object_add(conn_update, "user_list", user_list);
-
      	   	    post_str = json_object_to_json_string(conn_update);
-
      	   	    slog(LOG_ALARM, "post_buf: %s\n", post_str);
+
 				}
 
  	       break;
 		case ST_CARDINFO: {
-                  int i = 0;
                   int64_t dif_tx = 0;
                   int64_t dif_rx = 0;
-                  json_object *netcard_update = json_object_new_object();
+                  netcard_update = json_object_new_object();
                   json_object *card_list = json_object_new_array();
                   for (i = 0; i < sockscf.external.addrc; i++) {
                         dif_tx = g_stat[i].last_tx - g_stat[i].tx;
@@ -2229,8 +2259,8 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
                             json_object_object_add(card, "uploads", json_object_new_int64(0));
                             json_object_object_add(card, "downloads", json_object_new_int64(0));
                         } else {
-                            json_object_object_add(card, "uploads", json_object_new_int64(g_stat[i].last_tx - g_stat[i].tx));
-                            json_object_object_add(card, "downloads", json_object_new_int64(g_stat[i].last_rx - g_stat[i].rx));
+                            json_object_object_add(card, "uploads", json_object_new_int64(dif_tx));
+                            json_object_object_add(card, "downloads", json_object_new_int64(dif_rx));
                         }
 
                         json_object_array_add(card_list, card);
@@ -2252,8 +2282,16 @@ static int doupdate(CURL *handle, int type, monitor_t *monitor)
 
  	curl_easy_setopt(handle, CURLOPT_POSTFIELDS, post_str);
  	curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, &process_data);
- 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 0L);
+ 	curl_easy_setopt(handle, CURLOPT_WRITEDATA, monitor);
+ 	curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
  	curl_easy_perform(handle);
+
+    if (type == ST_USERINFO) {
+        json_object_put(conn_update);
+    } else if (type == ST_CARDINFO) {
+        json_object_put(netcard_update);
+    }
 
 	return 0;
 }
+
