@@ -63,6 +63,7 @@
 
 #include <regex.h>
 
+#define MPTCP_AUTH_CLIENT_ENABLED 28
 #define MPTCP_AUTH_UUID 29
 /*
  * Throttling for objects we send to the monitor process for testing.
@@ -1348,7 +1349,7 @@ typedef struct {
    } alarm;
 } monitor_if_t;
 
-#define SOCKD_MAX_CLIENTS           (10000)
+#define SOCKD_MAX_CLIENTS           (5000)
 typedef struct {
    struct {
       uint32_t     uid;

@@ -1136,7 +1136,6 @@ case ENFILE:
                      case EBADF:
                      case EFAULT:
                      case EINVAL:
-
                         SERRX(errno);
 
                      default:
@@ -1167,37 +1166,37 @@ case ENFILE:
                     sockscf.internal.addrv[i].s,
                     uuid, rc);
 
-      monitor_t *monitor = sockscf.monitor;
-      monitor_stats_t *mstats;
+               monitor_t *monitor = sockscf.monitor;
+               monitor_stats_t *mstats;
 
-      rule_t rule;
-      bzero(&rule, sizeof(rule));
-      COPY_MONITORFIELDS(monitor, &rule);
-      sockd_shmat(&rule, SHMEM_MONITOR);
-      COPY_MONITORFIELDS(&rule, monitor);
+               rule_t rule;
+               bzero(&rule, sizeof(rule));
+               COPY_MONITORFIELDS(monitor, &rule);
+               sockd_shmat(&rule, SHMEM_MONITOR);
+               COPY_MONITORFIELDS(&rule, monitor);
 
-      if (monitor->mstats_shmid != 0) {
-          SASSERTX(monitor->mstats != NULL);
-          mstats = &monitor->mstats->object.monitor;
-          int j;
+               if (monitor->mstats_shmid != 0) {
+                   SASSERTX(monitor->mstats != NULL);
+                   mstats = &monitor->mstats->object.monitor;
+                   int j;
 
-          uint32_t user_cnt  =  mstats->user_info.user_cnt;
-          for (j = 0; j < user_cnt; j++) {
-              if(mstats->user_info.alarm[j].uid == uuid)
-                  break;
-          }
+                   uint32_t user_cnt  =  mstats->user_info.user_cnt;
+                   for (j = 0; j < user_cnt; j++) {
+                       if(mstats->user_info.alarm[j].uid == uuid)
+                           break;
+                   }
 
-          mstats->user_info.alarm[j].uid = uuid;
-          mstats->user_info.alarm[j].sess_cnt += 1;
-          if (j == user_cnt) {
-            mstats->user_info.user_cnt += 1;
-          }
+                   mstats->user_info.alarm[j].uid = uuid;
+                   mstats->user_info.alarm[j].sess_cnt += 1;
+                   if (j == user_cnt && j < SOCKD_MAX_CLIENTS) {
+                       mstats->user_info.user_cnt += 1;
+                   }
 
-          slog(LOG_ALARM, "accept:######## user_cnt=%d, uid=%x,%d\n", user_cnt, uuid, uuid);
-      }
+                   slog(LOG_ALARM, "accept:######## user_cnt=%d, uid=%x,%d\n", user_cnt, uuid, uuid);
+               }
 
-      sockd_shmdt(&rule, SHMEM_MONITOR);
-      COPY_MONITORFIELDS(&rule, monitor);
+               sockd_shmdt(&rule, SHMEM_MONITOR);
+               COPY_MONITORFIELDS(&rule, monitor);
 
                if ((child = nextchild(PROC_NEGOTIATE, SOCKS_TCP)) == NULL) {
                   log_clientdropped(&client.from);
@@ -1205,7 +1204,8 @@ case ENFILE:
                   close(client.s);
                   continue;
                }
-log_clientsend(&client.from, child, 0);
+
+               log_clientsend(&client.from, child, 0);
 
                p = send_client(child->s, &client, NULL, 0);
 

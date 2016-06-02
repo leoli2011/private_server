@@ -3449,7 +3449,7 @@ connectstatus(io, badfd)
 
 void
 io_update(timenow, bwused, i_read, i_written,
-          e_read, e_written, rule, packetrule, lock, uid)
+          e_read, e_written, rule, packetrule, lock, fd)
    const struct timeval *timenow;
    const size_t bwused;
    const iocount_t *i_read;
@@ -3459,7 +3459,7 @@ io_update(timenow, bwused, i_read, i_written,
    rule_t *rule;
    rule_t *packetrule;
    const int lock;
-   const uint32_t uid;
+   const uint32_t fd;
 {
    const char *function = "io_update()";
    const iocount_t zero = { 0 };
@@ -3506,11 +3506,9 @@ io_update(timenow, bwused, i_read, i_written,
       int uuid = 0;
       int rc = -1;
       int aa = sizeof(int);
-      rc = getsockopt(uid, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
-      //slog(LOG_ALARM, "%s ################333rc=%d uuid=%d, socket =%d uif=%p\n", __func__, rc, uuid, uid,uif);
+      rc = getsockopt(fd, IPPROTO_TCP, MPTCP_AUTH_UUID, &uuid, &aa);
       for (i = 0; i < uif->user_cnt; i++) {
           if (uuid != 0 && uif->alarm[i].uid == uuid) {
-              //slog(LOG_ALARM, "########## uif=%p, uid=%d, alarm->uid=%d, i=%d  ", uif, uuid, uif->alarm[i].uid, i);
               break;
           }
       }
@@ -3535,9 +3533,6 @@ io_update(timenow, bwused, i_read, i_written,
    }
 
    uif ? uif->alarm[i].uploads += e_written->bytes : 0;
-//   if (uif) {
-//       slog(LOG_ALARM, "########## i=%d uid=%d, uploads=%d", i, uif->alarm[i].uid, uif->alarm[i].uploads);
-//   }
    if (monitor->external.alarm.data.recv.isconfigured
    && e_read != NULL
    && memcmp(&zero, e_read, sizeof(zero)) != 0) {

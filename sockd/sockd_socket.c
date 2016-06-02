@@ -347,11 +347,10 @@ bindinternal(protocol)
       if (setsockopt(l->s, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)) != 0)
          swarn("%s: setsockopt(SO_REUSEADDR)", function);
 
-#define MPTCP_AUTH_CLIENT_ENABLED 28
       int mptcp_enable = 1;
       int rc = setsockopt(l->s, IPPROTO_TCP, MPTCP_AUTH_CLIENT_ENABLED, &mptcp_enable, sizeof(int));
       if (rc != 0)
-         swarn("%s: setsockopt(SO_REUSEADDR)", function);
+         swarn("%s: setsockopt(MPTCP_AUTH_CLIENT_ENABLED)", function);
 
       if (listen(l->s, SOCKD_MAXCLIENTQUEUE) == -1) {
          swarn("%s: listen(%d) failed", function, SOCKD_MAXCLIENTQUEUE);

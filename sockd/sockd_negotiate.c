@@ -1460,7 +1460,6 @@ recv_negotiate(void)
                          ALARM_INTERNAL,
                           &cinfo,
                           sockscf.shmemfd, 0);
-                          //sockscf.shmemfd, neg->s);
 
       neg->negstate.crule = &neg->crule;
 

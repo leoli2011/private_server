@@ -174,7 +174,6 @@ childcheck(type)
       case PROC_REQUEST:
          childc            = &reqchildc;
          childv            = &reqchildv;
-         //minfreeslots      = SOCKD_FREESLOTS_REQUEST;
          minfreeslots      = SOCKD_FREESLOTS_REQUEST;
          minclientshandled = SOCKD_MIN_CLIENTS_HANDLED_REQUEST;
          maxslotsperproc   = SOCKD_REQUESTMAX;

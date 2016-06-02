@@ -2109,12 +2109,11 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
     json_object *logout;
     int i;
 
-    slog(LOG_ALARM, "%s\n", (char*) buffer);
-
+    //slog(LOG_ALARM, "%s\n", (char*)buffer);
     monitor_t *monitor = (monitor_t *)user_p;
 	json_result = json_tokener_parse(buffer);
 	if (json_result == NULL) {
-        slog(LOG_ALARM, "Failed to get json result\n");
+        slog(LOG_ALARM, "Failed to get json result, buf=%s \n", (char *)buffer);
 		return 0;
 	}
 
