@@ -93,7 +93,11 @@
 #undef bind
 #undef connect
 #endif /* __sun */
+#ifdef __linux__
+#include <linux/if.h>
+#else
 #include <net/if.h>
+#endif
 #if NEED_SYS_SOCKIO_H
 #include <sys/sockio.h>
 #endif /* NEED_SYS_SOCKIO_H */

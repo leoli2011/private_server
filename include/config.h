@@ -245,8 +245,8 @@
  * The server tries to be a little more intelligent about this, but not much.
  */
 #define SOCKD_FREESLOTS_NEGOTIATE     (MAX(SOCKD_NEGOTIATEMAX, 8))
-//#define SOCKD_FREESLOTS_REQUEST       (MAX(SOCKD_REQUESTMAX,   16))
-#define SOCKD_FREESLOTS_REQUEST       1
+#define SOCKD_FREESLOTS_REQUEST       (MAX(SOCKD_REQUESTMAX,   16))
+//#define SOCKD_FREESLOTS_REQUEST       1
 #define SOCKD_FREESLOTS_IO            (MAX(SOCKD_IOMAX,        32))
 
 #if SOCKD_FREESLOTS_NEGOTIATE < 1

@@ -1128,7 +1128,7 @@ moncontrol(1);
                            slog(LOG_DEBUG, "accept(2) of new client failed: %s",
                                 strerror(errno));
                         break;
-case ENFILE:
+                     case ENFILE:
                      case EMFILE:
                         swarn("could not accept new client");
                         break;

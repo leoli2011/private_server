@@ -268,7 +268,8 @@ top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS =  include sockd unlicensed example doc bin SPECS capi contrib
+#SUBDIRS =  include sockd unlicensed example doc bin SPECS capi contrib
+SUBDIRS =  sockd
 DIST_SUBDIRS = include libscompat unlicensed example doc bin SPECS capi contrib sockd lib dlib dlib64
 EXTRA_DIST = BUGS CREDITS LICENSE SUPPORT VERSION VERSION.in UPGRADE \
 	     README.ldap 
