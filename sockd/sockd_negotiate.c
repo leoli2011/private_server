@@ -660,7 +660,7 @@ run_negotiate()
                                        ALARM_INTERNAL,
                                        &cinfo,
                                        error,
-                                       sockscf.shmemfd);
+                                       sockscf.shmemfd, 0);
                }
 
                if (!erroriseof && neg->negstate.complete) {

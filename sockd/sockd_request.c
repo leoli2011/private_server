@@ -425,7 +425,7 @@ run_request()
                                  ALARM_INTERNAL,
                                  &cinfo,
                                  strerror(errno),
-                                 sockscf.shmemfd);
+                                 sockscf.shmemfd, 0);
 
          SHMEM_UNUSE(rule, &cinfo, sockscf.shmemfd, SHMEM_ALL);
 
@@ -1606,7 +1606,7 @@ dorequest(mother, request, clientudpaddr, weclosedfirst, emsg, emsglen)
                                  ALARM_INTERNAL,
                                  &cinfo,
                                  strerror(errno),
-                                 sockscf.shmemfd);
+                                 sockscf.shmemfd, 0);
 
          permit = 0;
       }
@@ -2417,7 +2417,7 @@ dorequest(mother, request, clientudpaddr, weclosedfirst, emsg, emsglen)
                                              ALARM_INTERNAL,
                                              &cinfo,
                                              strerror(errno),
-                                             sockscf.shmemfd);
+                                             sockscf.shmemfd, 0);
                   }
 
                   /* wait until here so we get the correct shmem-settings. */

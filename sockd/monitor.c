@@ -930,13 +930,14 @@ alarm_add_connect(alarm, sides, cinfo, lock, io)
 }
 
 void
-alarm_add_disconnect(weclosedfirst, alarm, sides, cinfo, reason, lock)
+alarm_add_disconnect(weclosedfirst, alarm, sides, cinfo, reason, lock, io)
    const int weclosedfirst;
    rule_t *alarm;
    const size_t sides;
    const clientinfo_t *cinfo;
    const char *reason;
    const int lock;
+   const sockd_io_t *io;
 {
 
    SASSERTX(reason != NULL);
@@ -946,7 +947,7 @@ alarm_add_disconnect(weclosedfirst, alarm, sides, cinfo, reason, lock)
                          sides,
                          cinfo,
                          reason,
-                         lock, 0);
+                         lock, io);
 }
 
 static void
@@ -2045,7 +2046,7 @@ static size_t process_data(void *buffer, size_t size, size_t nmemb, void *user_p
     json_object *logout;
     int i;
 
-    //slog(LOG_ALARM, "%s\n", (char*)buffer);
+    slog(LOG_ALARM, "###%s\n", (char*)buffer);
     monitor_t *monitor = (monitor_t *)user_p;
 	json_result = json_tokener_parse(buffer);
 	if (json_result == NULL) {
@@ -2172,20 +2173,34 @@ static int doupdate(char *url, int type, monitor_t *monitor)
 
 	switch (type) {
 		case ST_USERINFO: {
-                    int j;
+                    int j, k;
                     conn_update = json_object_new_object();
                     json_object *user_list = json_object_new_array();
-                    json_object *dip = json_object_new_array();
-     	   	        slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
+                    slog(LOG_ALARM, "alarm ##########:uif->user_cnt=%d\n", uif->user_cnt);
 
                     for (i = 0; i < uif->user_cnt; i++) {
+                        const char *dip_str;
+                        json_object *dip = json_object_new_array();
                         json_object *user_info = json_object_new_object();
+                        json_object *sim_cards = json_object_new_array();
                         json_object_object_add(user_info, "uid", json_object_new_int(uif->alarm[i].uid));
+
                         json_object_object_add(user_info, "connect_count", json_object_new_int(uif->alarm[i].sess_cnt));
                         json_object_object_add(user_info, "uploads",  json_object_new_int64(uif->alarm[i].uploads));
                         json_object_object_add(user_info, "downloads", json_object_new_int64(uif->alarm[i].downloads));
+
+                        for (k = 0; k < sockscf.external.addrc; k++) {
+                            json_object *one_card = json_object_new_object();
+                            json_object_object_add(one_card, "ip", json_object_new_string(inet_ntoa(g_stat[k].addr)));
+                            json_object_object_add(one_card, "uploads",  json_object_new_int64(uif->alarm[k].uploads / 3));
+                            json_object_object_add(one_card, "downloads", json_object_new_int64(uif->alarm[k].downloads / 3));
+                            json_object_array_add(sim_cards, one_card);
+                        }
+
+                        json_object_object_add(user_info, "sim_cards", sim_cards);
                         for (j = 0; j < 10 && uif->alarm[i].dip[j]; j++) {
                             json_object_array_add(dip, json_object_new_int(uif->alarm[i].dip[j]));
+     	   	                dip_str = json_object_to_json_string(dip);
                         }
                         json_object_object_add(user_info, "dest_ip", dip);
                         json_object_array_add(user_list, user_info);

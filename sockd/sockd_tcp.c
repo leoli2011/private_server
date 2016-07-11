@@ -265,7 +265,7 @@ do {                                                                           \
                            alarmside,                                          \
                            &cinfo,                                             \
                            (iostatus) == IO_CLOSE ? "EOF" : strerror(errno),   \
-                           sockscf.shmemfd);                                   \
+                           sockscf.shmemfd, io);                               \
                                                                                \
       disconnectside->state.alarmdisconnectdone = 1;                           \
    }                                                                           \

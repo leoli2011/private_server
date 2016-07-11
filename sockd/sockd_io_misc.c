@@ -280,7 +280,7 @@ io_add_alarmdisconnects(io, reason)
                         sidestodisconnect,
                         &cinfo,
                         reason,
-                        sockscf.shmemfd);
+                        sockscf.shmemfd, io);
 
    if (sidestodisconnect & ALARM_INTERNAL)
       CONTROLIO(io)->state.alarmdisconnectdone  = 1;

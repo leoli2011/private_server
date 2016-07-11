@@ -516,7 +516,7 @@ moncontrol(1);
                                              ALARM_INTERNAL,
                                              &cinfo,
                                              strerror(errno),
-                                             sockscf.shmemfd);
+                                             sockscf.shmemfd, 0);
                }
                else { /* error with child? */
 #if HAVE_NEGOTIATE_PHASE
@@ -605,7 +605,7 @@ moncontrol(1);
                                           ALARM_INTERNAL,
                                           &cinfo,
                                           strerror(errno),
-                                          sockscf.shmemfd);
+                                          sockscf.shmemfd, 0);
                }
                else { /* error with target socket? */
                   if (saved_io.state.command != SOCKS_UDPASSOCIATE
@@ -618,7 +618,7 @@ moncontrol(1);
                                              ALARM_EXTERNAL,
                                              &cinfo,
                                              strerror(errno),
-                                             sockscf.shmemfd);
+                                             sockscf.shmemfd, 0);
                   }
 
 #if HAVE_NEGOTIATE_PHASE
@@ -767,7 +767,7 @@ moncontrol(1);
                                              ALARM_INTERNAL,
                                              &cinfo,
                                              strerror(errno),
-                                             sockscf.shmemfd);
+                                             sockscf.shmemfd, 0);
                   }
                   else {
 #if HAVE_NEGOTIATE_PHASE
@@ -923,7 +923,7 @@ moncontrol(1);
                                              ALARM_INTERNAL,
                                              &cinfo,
                                              strerror(errno),
-                                             sockscf.shmemfd);
+                                             sockscf.shmemfd, 0);
                   }
                   else {
                      if (io.state.command != SOCKS_UDPASSOCIATE
@@ -936,7 +936,7 @@ moncontrol(1);
                                                 ALARM_EXTERNAL,
                                                 &cinfo,
                                                 strerror(errno),
-                                                sockscf.shmemfd);
+                                                sockscf.shmemfd, 0);
                      }
 
 #if HAVE_NEGOTIATE_PHASE

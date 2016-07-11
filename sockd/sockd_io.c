@@ -945,7 +945,7 @@ run_io()
                                        ALARM_INTERNAL,
                                        &cinfo,
                                        r == 0 ? "EOF" : strerror(errno),
-                                       sockscf.shmemfd);
+                                       sockscf.shmemfd, io);
 
                   io->control.state.alarmdisconnectdone = 1;
                }
@@ -3320,7 +3320,7 @@ connectstatus(io, badfd)
                                     ALARM_INTERNAL,
                                     &cinfo,
                                     strerror(errno),
-                                    sockscf.shmemfd);
+                                    sockscf.shmemfd, io);
 
                io->src.state.alarmdisconnectdone = 1;
             }
@@ -3406,7 +3406,7 @@ connectstatus(io, badfd)
                            ALARM_EXTERNAL,
                            &cinfo,
                            strerror(errno),
-                           sockscf.shmemfd);
+                           sockscf.shmemfd, 0);
 
       io->dst.state.alarmdisconnectdone = 1;
    }
