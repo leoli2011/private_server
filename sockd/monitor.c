@@ -669,7 +669,7 @@ alarm_inherit(from, cinfo_from, to, cinfo_to, sidesconnected)
             alarm_remove_session(from,
                                  sidesconnected,
                                  cinfo_from,
-                                 sockscf.shmemfd);
+                                 sockscf.shmemfd, 0);
          }
 
          SASSERTX(to->mstats_shmid != 0);
@@ -815,7 +815,7 @@ monitor_move(oldmonitor, newmonitor, stayattached, sidesconnected, cinfo, lock)
       socks_lock(lock, (off_t)alarm.mstats_shmid, 1, 1, 1);
 
       if (alarm.alarmsconfigured & ALARM_DISCONNECT)
-         alarm_remove_session(&alarm, sidesconnected, cinfo, -1);
+         alarm_remove_session(&alarm, sidesconnected, cinfo, -1, 0);
 
       monitor_unuse(alarm.mstats, cinfo, -1);
 
@@ -895,11 +895,12 @@ monitor_unuse(mstats, cinfo, lock)
 }
 
 void
-alarm_remove_session(alarm, sides, cinfo, lock)
+alarm_remove_session(alarm, sides, cinfo, lock, io)
    rule_t *alarm;
    const size_t sides;
    const clientinfo_t *cinfo;
    const int lock;
+   const sockd_io_t *io;
 {
 
    disconnect_alarm_body(0,
@@ -908,7 +909,7 @@ alarm_remove_session(alarm, sides, cinfo, lock)
                          sides,
                          cinfo,
                          NULL,
-                         lock, 0);
+                         lock, io);
 }
 
 void
@@ -1091,7 +1092,9 @@ disconnect_alarm_body(weclosedfirst, op, alarm, sides, cinfo, reason, lock, io)
                SASSERTX(disconnect->sessionc > 0);
 
                disconnect->sessionc -= 1;
-               uif ? uif->alarm[i].sess_cnt -=1 : 0;
+               if (uif && io) {
+                   uif ? uif->alarm[i].sess_cnt -=1 : 0;
+               }
 
                if (weclosedfirst)
                   disconnect->self_disconnectc += 1;

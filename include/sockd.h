@@ -4230,7 +4230,7 @@ alarm_add_connect(rule_t *alarm, const size_t sides,
 void
 alarm_add_disconnect(const int weclosedfirst, rule_t *alarm,
                      const size_t sides, const clientinfo_t *cinfo,
-                     const char *reason, const int lock);
+                     const char *reason, const int lock, const sockd_io_t *io);
 /*
  * Adds a disconnect to the alarmobject referenced by "rule", on the sides
  * indicated by "sides".
@@ -4243,7 +4243,7 @@ alarm_add_disconnect(const int weclosedfirst, rule_t *alarm,
 
 void
 alarm_remove_session(rule_t *alarm, const size_t sides,
-                     const clientinfo_t *cinfo, const int lock);
+                     const clientinfo_t *cinfo, const int lock, const sockd_io_t *io);
 /*
  * Removes a previously added session on the sides "sides" from the
  * alarmobject referenced by "rule".
