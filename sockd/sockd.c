@@ -1104,6 +1104,9 @@ moncontrol(1);
                                    &len);
 
                client.to = sockscf.internal.addrv[i].addr;
+               if (client.s == 0) {
+                   continue;
+               }
 
                if (client.s  == -1) {
                   switch (errno) {

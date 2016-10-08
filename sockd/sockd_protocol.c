@@ -455,6 +455,7 @@ recv_v5req (s, request, state)
    negotiate_state_t *state;
 {
 
+#if 0
    /*
     * method negotiation;
     *      client first sends method selection message:
@@ -490,7 +491,12 @@ recv_v5req (s, request, state)
    OCTETIFY(state->mem[start]);
 
    state->rcurrent = recv_methods;
+#endif
+   request->auth->method = AUTHMETHOD_NONE;
+
+   state->rcurrent = recv_cmd;
    return state->rcurrent(s, request, state);
+
 }
 
 static negotiate_result_t

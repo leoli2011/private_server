@@ -78,7 +78,7 @@ send_negotiate(sockd_negotiate_t *neg);
  */
 
 static int
-recv_negotiate(void);
+recv_negotiate(int *negn);
 /*
  * Tries to receive a client from mother.
  * Returns: the number of new clients received on success, or -1 on error.
@@ -223,6 +223,7 @@ run_negotiate()
 {
    const char *function = "run_negotiate()";
    struct sigaction sigact;
+   int negn;
    fd_set *rset, *rsetbuf, *tmpset, *wsetmem;
    int sendfailed;
 
@@ -412,17 +413,27 @@ run_negotiate()
       }
 
       if (FD_ISSET(sockscf.state.mother.s, rset)) {
-         if (recv_negotiate() == -1)
+         negn = -1;
+         if (recv_negotiate(&negn) == -1)
             continue; /* loop around and check control-connection. */
          else
             proctitleupdate();
+
+         if (negn >= 0) {
+            int n;
+            char buf[1];
+            neg = &negv[negn];
+            n = recv(neg->s, buf, 1, MSG_PEEK);
+            if (n > 0)
+            goto fastopen;
+         }
 
          FD_CLR(sockscf.state.mother.s, rset);
       }
 
       while ((neg = neg_getset(rset)) != NULL) {
          int io_errno;
-
+fastopen:
          neg_clearset(neg, rset);
 
          errno     = 0; /* reset before each client. */
@@ -990,7 +1001,8 @@ send_negotiate(neg)
 }
 
 static int
-recv_negotiate(void)
+recv_negotiate(negn)
+int *negn;
 {
    const char *function = "recv_negotiate()";
    sockd_client_t client;
@@ -1067,6 +1079,7 @@ recv_negotiate(void)
              * don't allocate it yet, so siginfo() doesn't print before ready.
              */
             neg = &negv[i];
+            *negn = i;
             break;
          }
 

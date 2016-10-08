@@ -352,6 +352,11 @@ bindinternal(protocol)
       if (rc != 0)
          swarn("%s: setsockopt(MPTCP_AUTH_CLIENT_ENABLED)", function);
 
+#if 1
+      int qlen = 65535;
+      setsockopt(l->s, SOL_TCP, TCP_FASTOPEN, &qlen, sizeof(qlen));
+#endif
+
       if (listen(l->s, SOCKD_MAXCLIENTQUEUE) == -1) {
          swarn("%s: listen(%d) failed", function, SOCKD_MAXCLIENTQUEUE);
          return -1;
